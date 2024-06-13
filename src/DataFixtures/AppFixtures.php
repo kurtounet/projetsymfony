@@ -13,11 +13,11 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
-    /*
-        public function __construct(private UserPasswordHasherInterface $hasher)
-        {
-        }
-    */
+
+    public function __construct(private UserPasswordHasherInterface $hasher)
+    {
+    }
+
     private function loadData($file)
     {
         $filename = __DIR__ . '/' . $file;
@@ -59,7 +59,7 @@ class AppFixtures extends Fixture
             $user->setUserName($value['firstName'] . '' . $value['lastName']);
             $user->setEmail($value['email']);
             $user->setPassword($value['password']);
-            // $user->setPassword($this->hasher->hashPassword($user, $value['password']));
+            $user->setPassword($this->hasher->hashPassword($user, $value['password']));
             $user->setRoles($value['roles']);
             $user->setAvatar($value['avatar']);
             //$user->setCharacterPref($value['characterPref']);

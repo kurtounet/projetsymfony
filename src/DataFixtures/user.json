@@ -4,9 +4,7 @@
     "lastName": "Doe",
     "email": "john.doe@gmail.com",
     "password": "pwd1",
-    "roles": [
-      "ROLE_ADMIN"
-    ],
+    "roles": ["ROLE_ADMIN"],
     "avatar": "assets/avatar1.jpg",
     "characterPref": 1
   },
@@ -15,9 +13,7 @@
     "lastName": "Smith",
     "email": "jane.smith@gmail.com",
     "password": "pwd2",
-    "roles": [
-      "ROLE_USER"
-    ],
+    "roles": ["ROLE_USER"],
     "avatar": "assets/avatar2.jpg",
     "characterPref": 2
   },
@@ -26,9 +22,7 @@
     "lastName": "Johnson",
     "email": "alice.johnson@gmail.com",
     "password": "pwd3",
-    "roles": [
-      "ROLE_ADMIN"
-    ],
+    "roles": ["ROLE_ADMIN"],
     "avatar": "assets/avatar3.jpg",
     "characterPref": 1
   },
@@ -37,9 +31,7 @@
     "lastName": "Brown",
     "email": "bob.brown@gmail.com",
     "password": "pwd4",
-    "roles": [
-      "ROLE_ADMIN"
-    ],
+    "roles": ["ROLE_ADMIN"],
     "avatar": "assets/avatar4.jpg",
     "characterPref": 2
   },
@@ -48,9 +40,7 @@
     "lastName": "Davis",
     "email": "carol.davis@gmail.com",
     "password": "pwd5",
-    "roles": [
-      "ROLE_USER"
-    ],
+    "roles": ["ROLE_USER"],
     "avatar": "assets/avatar5.jpg",
     "characterPref": 1
   },
@@ -59,9 +49,7 @@
     "lastName": "Miller",
     "email": "david.miller@gmail.com",
     "password": "pwd6",
-    "roles": [
-      "ROLE_ADMIN"
-    ],
+    "roles": ["ROLE_ADMIN"],
     "avatar": "assets/avatar6.jpg",
     "characterPref": 2
   },
@@ -70,9 +58,7 @@
     "lastName": "Garcia",
     "email": "eva.garcia@gmail.com",
     "password": "pwd7",
-    "roles": [
-      "ROLE_USER"
-    ],
+    "roles": ["ROLE_USER"],
     "avatar": "assets/avatar7.jpg",
     "characterPref": 1
   },
@@ -81,9 +67,7 @@
     "lastName": "Wilson",
     "email": "frank.wilson@gmail.com",
     "password": "pwd8",
-    "roles": [
-      "ROLE_ADMIN"
-    ],
+    "roles": ["ROLE_ADMIN"],
     "avatar": "assets/avatar8.jpg",
     "characterPref": 2
   },
@@ -92,9 +76,7 @@
     "lastName": "Martinez",
     "email": "grace.martinez@gmail.com",
     "password": "pwd9",
-    "roles": [
-      "ROLE_USER"
-    ],
+    "roles": ["ROLE_USER"],
     "avatar": "assets/avatar9.jpg",
     "characterPref": 1
   },
@@ -103,9 +85,7 @@
     "lastName": "Lopez",
     "email": "henry.lopez@gmail.com",
     "password": "pwd10",
-    "roles": [
-      "ROLE_ADMIN"
-    ],
+    "roles": ["ROLE_ADMIN"],
     "avatar": "assets/avatar10.jpg",
     "characterPref": 1
   }
