@@ -1,41 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Connexion{% endblock %}
 
 {% block body %}
-    <form method="post">
+<div class="flex justify-center bg-gray-500 w-full m-10 ">
+    <form method="post" class="flex flex-col content-center space-y-6  sm:w-full md:w-1/2  ">
         {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="text-red-500 border border-red-400 p-4 rounded-md">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
         {% if app.user %}
             <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}" class="text-blue-500 hover:text-blue-700">Déconnexion</a>
             </div>
         {% endif %}
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="username">Email</label>
-        <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control text-gray-950 p-1" autocomplete="email" required autofocus>
-        <label for="password">Password</label>
-        <input type="password" name="_password" id="password" class="form-control text-gray-950 p-1" autocomplete="current-password" required>
+        <h1 class="font-bold text-gray-900">Veuillez vous connecter</h1>
+        <div class="flex flex-col">
+            <label for="username" class="mb-2 text-gray-700">Email</label>
+            <input type="email" value="{{ last_username }}" name="_username" id="username" class="bg-white border border-gray-300 rounded-md p-2 text-gray-900 focus:ring-blue-500 focus:border-blue-500" autocomplete="email" required autofocus>
+        </div>
 
-        <input type="hidden" name="_csrf_token"
-               value="{{ csrf_token('authenticate') }}"
-        >
+        <div class="flex flex-col mt-4">
+            <label for="password" class="mb-2 text-gray-700">Mot de passe</label>
+            <input type="password" name="_password" id="password" class="bg-white border border-gray-300 rounded-md p-2 text-gray-900 focus:ring-blue-500 focus:border-blue-500" autocomplete="current-password" required>
+        </div>
 
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <div class="checkbox mb-3">
-                <input type="checkbox" name="_remember_me" id="_remember_me">
-                <label for="_remember_me">Remember me</label>
-            </div>
-        #}
+         Décommentez pour activer la fonctionnalité "se souvenir de moi"
+        <div class="flex items-center mt-4">
+            <input type="checkbox" name="_remember_me" id="_remember_me" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+            <label for="_remember_me" class="ml-2 block text-sm text-gray-900">Se souvenir de moi</label>
+        </div>
+         
 
-        <button class="btn btn-lg btn-primary" type="submit">
-            Me Connecter
+        <button class="mt-4 w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+            Se connecter
         </button>
     </form>
+    </div>
 {% endblock %}
