@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!{% endblock %}
+
+{% block body %}
+ {% if hero != null %}
+    <div class="flex bg-gray-400 m-10 rounded-lg p-5" >
+    <img class="object-scale-down rounded-lg " src="{{ hero.image }}" alt="{{ hero.name }}" 
+    style="width: 300px; height: 500px;">
+    <div class="mt-1 p-5">
+        <h1 class="text-red-500 text-6xl text-center font-semibold m-1" > {{ hero.name }} </h1>
+         
+        <p class="text-lg font-semibold m-1">Ki : {{ hero.ki }}</p>
+        <p class="text-lg font-semibold m-1">Max KI : {{ hero.maxKi }}</p>
+        <p class="text-lg font-semibold m-1">Race : {{ hero.race }}</p>
+        <p class="text-lg font-semibold m-1">Genre : {{ hero.gender }}</p>
+        <p class="text-lg font-semibold m-1">Description : {{ hero.description }}</p>
+        <p class="text-lg font-semibold m-1">Affiliation : {{ hero.affiliation }}</p>
+        
+    </div>
+</div>
+{% else %}
+<div class="flex justify-center bg-gray-200 m-2" >
+        <p class="text-lg font-semibold">Ce personnage n'existe pas</p>        
+</div>
+ {% endif %}
+
+
+
+{% endblock %}
