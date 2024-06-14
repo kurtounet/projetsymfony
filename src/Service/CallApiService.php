@@ -25,7 +25,7 @@ class CallApiService
     }
     public function downloadImage($link): array
     {
-
+        $file = get_file_contents("https://dragonball-api.com/characters/goku_normal.webp");
         $response = $this->client->request(
             'GET',
             'https://dragonball-api.com/api/planets?page=' . '&limit=10'
