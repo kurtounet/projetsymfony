@@ -6,7 +6,7 @@ PUBLIC:
 -> page de détail pour chaque personnage quand on clique sur la page.
 -> page formulaire contact + envoyer email
 -> page inscription + contrainte de validation // user unique
--> page login authentification JWT
+-> page login authentification
 
 Entity:
 -> User

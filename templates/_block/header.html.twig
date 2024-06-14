@@ -21,12 +21,20 @@
 	</nav>
 	<div>
 		
-		{% if ( is_granted('ROLE_ADMIN') or is_granted('ROLE_ADMIN') )%}
-		<a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ path('app_logout') }}">
+		{% if ( is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') )%}
 
+		{% if (app.user.roles[0] =='ROLE_ADMIN' ) %}
+			<p>compte Admin:</p>
+		{% else %}  		 
+			<p>Compte Utilisateur:</p>			 	
+		{% endif %}
+		<p>{{ app.user.userIdentifier }}</p>
+
+		<a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ path('app_logout') }}">
 			Se déconnecter
 		</a>
 		{% else %}
+		
 		<a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ path('app_login') }}">
 
 			Se connecter
