@@ -26,13 +26,22 @@ class ContactController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $contact->setcreatedAt(new \DateTime());
-
-
             $em->persist($contact);
             $em->flush();
-            $this->addFlash('success', 'Votre message a bien été envoyé !');
+            //$this->addFlash('success', 'Votre message a bien été envoyé !');
+
+            return $this->redirectToRoute('app_contact_thanks');
         }
 
-        return $this->render('contact/index.html.twig', ['Contact_form' => $form]);
+        return $this->render(
+            'contact/index.html.twig',
+            ['Contact_form' => $form]
+        );
+    }
+    #[Route('/contact/thanks', name: 'app_contact_thanks')]
+    public function contactThanks(): Response
+    {
+
+        return $this->render('contact/thanks.html.twig');
     }
 }

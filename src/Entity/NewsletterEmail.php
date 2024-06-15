@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: NewsletterEmailRepository::class)]
-#[UniqueEntity(['email'], "Cet email existe déjà dans la newsletter")]
+#[UniqueEntity(['email'], "Vous êtes déja inscrit à la newsletter")]
 class NewsletterEmail
 {
     #[ORM\Id]

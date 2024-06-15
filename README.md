@@ -1,24 +1,49 @@
-Projet examsymfony
+# Projet examen Symfony
 
-PUBLIC:
--> page acceuil.
--> page liste des cartes des personnage.
--> page de détail pour chaque personnage quand on clique sur la page.
--> page formulaire contact + envoyer email
--> page inscription + contrainte de validation // user unique
--> page login authentification
+# PUBLIC :
+##### Page acceuil. (fait)
+##### Page des héros. (fait)
 
-Entity:
--> User
--> Character
--> Planet
--> Transfomation
+##### Page de détail pour chaque héros (clique sur la carte). (fait)
 
-ADMIN:
+##### Page formulaire inscription Newsletter (fait)
+
+    - formulaire (fait)
+    - validation: 
+        unique(fait) 
+        champ vide (fait)
+    - email de notification (fait)
+
+##### Page formulaire contact (fait)
+
+    - formulaire (fait)
+    - validation:         
+        champ vide(fait)
+    - email de notification (fait)
+
+##### Page formulaire contact (fait) + envoyer email de notification (à faire)
+
+## Page inscription + contrainte de validation // user unique
+
+->  authentification (fait)
+    page login (fait)
+    authentification (fait)
+
+# Entity :
+
+##### User
+
+##### Character
+
+##### Planet
+
+##### Transfomation
+
+#  ADMIN:
 -> Ajouter , modifier, supprimer user
 -> Ajouter , modifier, supprimer personnage
 
-FIXTURES:
+# FIXTURES:
     charger la base de donnée a partir d'une api (https://web.dragonball-api.com/)
     avec HTTPclient.
 

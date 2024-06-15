@@ -20,7 +20,6 @@ class NewsletterController extends AbstractController
         EmailNotification $emailNotification
     ): Response {
 
-
         $newsletterEmail = new NewsletterEmail();
         $form = $this->createForm(NewsletterType::class, $newsletterEmail);
 
