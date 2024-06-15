@@ -3,6 +3,7 @@
 namespace App\Command;
 
 use App\Entity\Character;
+use App\Entity\Planet;
 use App\Service\CallApiService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -11,6 +12,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\NormalizableInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -26,11 +30,12 @@ class CallApiCommand extends Command
     private const INFO_CHARACTER = 'https://dragonball-api.com/api/characters';
     private const INFO_PLANET = 'https://dragonball-api.com/api/planets';
     private $httpClient;
+    private $normalizer;
+    private $callApiService;
 
-    public function __construct(HttpClientInterface $client)
+    public function __construct(CallApiService $callApiService)
     {
-        $this->httpClient = $client;
-
+        $this->callApiService = $callApiService;
         parent::__construct();
     }
 
@@ -47,26 +52,34 @@ class CallApiCommand extends Command
     {
 
 
-        // $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
 
         $pathDirFixtures = __DIR__ . self::DIR_FIXTURES;
         $io = new SymfonyStyle($input, $output);
-        $callApiService = new CallApiService($this->httpClient);
+        //$callApiService = new CallApiService($this->httpClient);
 
         /**************Planètes***************/
         // Appel API pour recupérer les infos sur le nombre de planètes 
-        $planets = json_decode($callApiService->getData(self::INFO_PLANET), true);
+        $planets = json_decode($this->callApiService->getData(self::INFO_PLANET), true);
         //construit l'url , page 1 , limit = itemsPerPage * totalPages = toute les planètes en 1 fois
         $url = '?page=1&limit=' . strval($planets["meta"]["itemsPerPage"] * $planets["meta"]["totalPages"]);
         //Appel API pour recupérer toute les planètes
-        $planets = json_decode($callApiService->getData(self::INFO_PLANET . $url), true);
-        //Appel API pour recupérer tout les planètes         
-        file_put_contents(
-            $pathDirFixtures . 'Planets.json',
-            json_encode($planets["items"])
-        );
-        echo "Planètes : récupére avec succes !" . PHP_EOL;
+        $Jsonplanets = json_decode($this->callApiService->getData(self::INFO_PLANET . $url));
 
+        $items = $Jsonplanets['items'];
+        echo json_decode($items);
+        // $planets = $this->serializer->deserialize($Jsonplanets, Planet::class . '[]', 'json');
+
+
+
+
+
+        /*
+                file_put_contents(
+                    $pathDirFixtures . 'Planets.json',
+                    $Jsonplanets
+                );
+                echo "Planètes : récupére avec succes !" . PHP_EOL;
+        */
 
         /**************Personnage***************/
         /**
@@ -82,9 +95,11 @@ class CallApiCommand extends Command
          */
         // Appel API pour recupérer les id des Personnages + pagination  
         // pagination => "totalItems": 58,"itemCount": 10,"itemsPerPage": 10,"totalPages": 6,"currentPage": 1
-        $infosCharacters = json_decode($callApiService->getData(self::INFO_CHARACTER), true);
-        $url = '?page=1&limit=' . strval($infosCharacters["meta"]["itemsPerPage"] * $infosCharacters["meta"]["totalPages"]);
-        $AllCharacters = $callApiService->getData(self::INFO_CHARACTER . $url);
+        /*
+         $infosCharacters = json_decode($callApiService->getData(self::INFO_CHARACTER), true);
+         $url = '?page=1&limit=' . strval($infosCharacters["meta"]["itemsPerPage"] * $infosCharacters["meta"]["totalPages"]);
+         $AllCharacters = $callApiService->getData(self::INFO_CHARACTER . $url);
+         */
         //$character = $serializer->deserialize($AllCharacters, Character::class, 'json');
 
         // echo $character->getName();

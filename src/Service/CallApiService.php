@@ -3,7 +3,7 @@
 namespace App\Service;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
+
 
 class CallApiService
 {
@@ -23,17 +23,31 @@ class CallApiService
         }
 
     }
-    public function downloadImage($link): array
+    public function downloadImage($url, $path): array|string
     {
-        $file = get_file_contents("https://dragonball-api.com/characters/goku_normal.webp");
-        $response = $this->client->request(
-            'GET',
-            'https://dragonball-api.com/api/planets?page=' . '&limit=10'
-        );
-        return $response->toArray();
+
+        // Initialiser CURL
+        $ch = curl_init($url);
+
+        // Définir les options de CURL
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+
+        // Télécharger l'image
+        $raw = curl_exec($ch);
+        curl_close($ch);
+
+        if (file_exists($path)) {
+            unlink($path); // Assurez-vous de ne pas avoir de fichier dupliqué
+        }
+
+        // Sauvegarder le fichier
+        if (file_put_contents($path, $raw)) {
+            return "Image téléchargée avec succès.";
+        } else {
+            return "Échec du téléchargement de l'image.";
+        }
     }
-
-
-
 
 }
