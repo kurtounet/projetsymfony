@@ -65,10 +65,10 @@ class AppFixtures extends Fixture
             //$user->setCharacterPref($value['characterPref']);
             $manager->persist($user);
         }
-
+        echo "User created\n";
 
         // Fixtures Planets
-        $data = $this->loadData('Planets.json');
+        $data = $this->loadData('localPlanets.json');
         foreach ($data as $value) {
 
             $planet = new Planet();
@@ -84,7 +84,7 @@ class AppFixtures extends Fixture
         echo "Planets created\n";
 
         // Fixtures Characters
-        $data = $this->loadData('characters.json');
+        $data = $this->loadData('localCharacters.json');
         foreach ($data as $value) {
             $character = new Character();
             $character->setName($value['name']);
