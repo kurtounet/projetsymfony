@@ -1,6 +1,38 @@
+<div class="flex items-center justify-center">
+    <div class="w-1/2 bg-gray-300 rounded-lg p-4 shadow">
+     
+         
+             
+            <img
+            {% if user.avatar != 'avatar1.jpg' %} 
+            src="{{ '/assets/uploads/user/' ~ user.avatar }}"
+            {% else %}
+            src="{{ '/assets/avatar/' ~ user.avatar }}"
+            {% endif %}
+            alt="{{ user.email }}"
+            class="rounded-full max-h-[150px]"
+            />            
+            
+         
+        {{ form_start(form) }}
+        {{ form_row(form.avatar) }} 
+        {{ form_row(form.userName) }}
+        {{ form_row(form.firstName) }}
+        {{ form_row(form.lastName) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+        {{ form_row(form.characterPref,{
+            'label':'Mon héro préféré'
+        }) }}
  
-{{ form_start(form) }}
+ {#
+    {{ form_row(form.avatar) }}
     {{ form_widget(form) }}
+    #}
     <button class="btn bg-blue-500 p-5 rounded-lg justify-content-between">{{ button_label|default('Save') }}</button>
+    <button class="btn bg-blue-500 p-5 rounded-lg justify-content-between">{{ button_label|default('Save') }}</button>
+     
 {{ form_end(form) }}
+    </div>
+</div> 
  

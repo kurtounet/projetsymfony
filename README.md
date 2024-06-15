@@ -39,12 +39,15 @@
 
 ##### Transfomation
 
-# Espace utilisateur
+#  Utilisateur
+make:registration
+-> Inscription nouveau utilisateur (ok)
+-> Modifier profile utilisateur (ok) reste modife pwd et email
+#  Admin
+-> CRUD user
+-> CRUD heros
+-> CRUD Planète
 
-# Espace admin
-
--> Ajouter , modifier, supprimer user
--> Ajouter , modifier, supprimer personnage
 
 # FIXTURES:
     charger la base de donnée a partir d'une api (https://web.dragonball-api.com/)

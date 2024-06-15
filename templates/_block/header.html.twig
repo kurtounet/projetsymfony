@@ -18,20 +18,21 @@
 				<a href="{{ path('app_newsletter_subscribe') }}" class="hover:text-gray-300">Newsletter</a>
 			</li>
 			<li>
-				<a href="{{ path('app_profile_new') }}" class="hover:text-gray-300">Inscription</a>
+				<a href="{{ path('app_register') }}" class="hover:text-gray-300">Inscription</a>
 			</li>
 		</ul>
 	</nav>
 	<div class="flex">
 		
 		{% if ( is_granted('ROLE_ADMIN') or is_granted('ROLE_USER') )%}
-		
-			{% if (app.user.roles[0] =='ROLE_ADMIN' ) %}
+		 
+			{% if (app.user.roles[0] =='ROLE_ADMIN' ) %}			
 				<a href="{{ path('dashboard_admin') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Espace Admin</a>
 				<p class="p-2"> compte Admin: {{ app.user.userIdentifier }} </p>
+			
 			{% else %} 
-				<a href="{{ path('app_profile_edit') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Mon Compte</a> 		 
-				<p class="p-2"> compte Utilisateur :{{ app.user.userIdentifier }} </p>		 	
+				<a href="{{ path('app_profile_edit') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Mon Profile</a> 		 
+				<p class="p-2"> compte Utilisateur: {{ app.user.userIdentifier }} </p>		 	
 			{% endif %}
 			
 			 
@@ -42,6 +43,7 @@
 			<a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ path('app_login') }}">
 				Se connecter
 			</a>
+			 
 		{% endif %}
 	</div>
 </header>
