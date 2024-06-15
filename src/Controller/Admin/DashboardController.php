@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Admin\Controller\IndexAdminController;
+
 use App\Entity\Character;
 use App\Entity\Planet;
 use App\Entity\User;
@@ -21,7 +21,7 @@ class DashboardController extends AbstractDashboardController
         //return parent::index();
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
+
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
         return $this->redirect($adminUrlGenerator->setController(CharacterCrudController::class)->generateUrl());
 
