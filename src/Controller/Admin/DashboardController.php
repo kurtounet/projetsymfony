@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 
 use App\Entity\Character;
+use App\Entity\Contact;
 use App\Entity\Planet;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -15,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/admin', name: 'admin')]
+    #[Route('/admin', name: 'dashboard_admin')]
     public function index(): Response
     {
         //return parent::index();
@@ -23,7 +24,7 @@ class DashboardController extends AbstractDashboardController
         // Option 1. You can make your dashboard redirect to some common page of your backend
 
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        return $this->redirect($adminUrlGenerator->setController(CharacterCrudController::class)->generateUrl());
+        return $this->redirect($adminUrlGenerator->setController(ContactCrudController::class)->generateUrl());
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
         //
@@ -40,14 +41,16 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Projetsymfony');
+            ->setTitle('ESPACE ADMIN DBZ.COM');
+
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToCrud('Mes Messsages', 'fas fa-list', Contact::class);
+        yield MenuItem::linkToCrud('Les Utilisateurs', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Les Heros', 'fas fa-list', Character::class);
         yield MenuItem::linkToCrud('Les Planets', 'fas fa-list', Planet::class);
-        yield MenuItem::linkToCrud('Les Utilisateurs', 'fas fa-list', User::class);
     }
 }

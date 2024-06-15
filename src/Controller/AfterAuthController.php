@@ -15,4 +15,5 @@ class AfterAuthController extends AbstractController
             'controller_name' => 'AfterAuthController',
         ]);
     }
+
 }

@@ -34,6 +34,7 @@ class Contact
     private ?string $message = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Ce champ est obligatoire')]
     private ?string $subject = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
