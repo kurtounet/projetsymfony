@@ -19,8 +19,7 @@ class Planet
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $isDestroyed = null;
+
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -36,6 +35,9 @@ class Planet
      */
     #[ORM\OneToMany(targetEntity: Character::class, mappedBy: 'planet')]
     private Collection $characters;
+
+    #[ORM\Column]
+    private ?bool $isDestroyed = null;
 
     public function __construct()
     {
@@ -59,17 +61,7 @@ class Planet
         return $this;
     }
 
-    public function isDestroyed(): ?bool
-    {
-        return $this->isDestroyed;
-    }
 
-    public function setDestroyed(?bool $isDestroyed): static
-    {
-        $this->isDestroyed = $isDestroyed;
-
-        return $this;
-    }
 
     public function getDescription(): ?string
     {
@@ -133,6 +125,18 @@ class Planet
                 $character->setPlanet(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isDestroyed(): ?bool
+    {
+        return $this->isDestroyed;
+    }
+
+    public function setDestroyed(bool $isDestroyed): static
+    {
+        $this->isDestroyed = $isDestroyed;
 
         return $this;
     }

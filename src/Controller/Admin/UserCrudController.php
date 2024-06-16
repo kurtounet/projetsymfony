@@ -2,8 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Character;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -12,18 +15,32 @@ class UserCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
+
         return User::class;
     }
 
-    /*
-        public function configureFields(string $pageName): iterable
-        {
-            return [
-                IdField::new('id'),
-                IdField::new('id'),
-                TextField::new('title'),
-                TextEditorField::new('description'),
-            ];
-        }
-    */
+
+    public function configureFields(string $pageName): iterable
+    {
+
+        return [
+
+            TextField::new('firstName'),
+            TextField::new('lastName'),
+            TextField::new('userName'),
+            EmailField::new('email'),
+            //TextField::new('password'),
+            TextField::new('avatar'),
+            // Adding the character preference field as a dropdown.
+            AssociationField::new('characterPref')
+                ->setLabel('Mon héros préféré')
+                ->setFormTypeOptions([
+                    'class' => Character::class,
+                    'choice_label' => 'name',
+                ]),
+
+        ];
+    }
+
+
 }
