@@ -1,8 +1,8 @@
-##### Projet examen Symfony
+# Projet examen Symfony
 
-A faire:
-ajouter createdat et updateat au entity
-finir commande pour api
+#### A faire:
+##### Ajouter createdat et updateat aux entity
+##### Finir la commande pour appel api
 
 
 # PUBLIC :
