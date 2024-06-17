@@ -6,6 +6,7 @@ use App\Entity\Character;
 use App\Entity\Planet;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -13,8 +14,9 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 
-class AppFixtures extends Fixture
+class CharactersFixtures extends Fixture implements DependentFixtureInterface
 {
+
 
     public function __construct(
         private UserPasswordHasherInterface $hasher,
@@ -27,66 +29,90 @@ class AppFixtures extends Fixture
         $filename = __DIR__ . '/' . $file;
         return file_get_contents($filename);
 
-        /*
-        echo $filename;
 
-
-        // Check if the file exists
-        if (!file_exists($filename)) {
-            echo "Erreur : le fichier n'existe pas.";
-            return null; // Return early to avoid further processing
-        }
-
-        // Attempt to read the file contents
-        $fileContents = file_get_contents($filename);
-        if ($fileContents === false) {
-            echo "Erreur : impossible de lire le fichier.";
-            return null;
-        }
-
-
-        // Decode the JSON data
-        $data = json_decode($fileContents, true);
-        if ($data === null) {
-            echo "Erreur : échec du décodage JSON.";
-            return null;
-        }
-*/
-        // return $data;
 
     }
+
     public function load(ObjectManager $manager): void
     {
-        // Fixtures User
-        /* $data = $this->loadData('user.json');
-         $users = $this->serializer->deserialize($data, User::class . '[]', 'json');
-         dd($users);*/
-        //$manager->persist($users);
 
-        $data = json_decode($this->loadData('charactersApi.json'), true);
+        echo "chargement des characters";
+        echo $this->loadData('LocalCharacters.json');
+    }
+    public function getDependencies()
+    {
+        return [
+            PlanetFixtures::class,
+        ];
+    }
+}
 
 
-        foreach ($data as $value) {
-            $planet = $value["originPlanet"];
-            echo json_encode($planet);
-        }
+/*
+        foreach ($arrayCharacters as $value) {
+            $Character = json_decode($value, true);
+            $idplanet = $Character["originPlanet"]["id"];
+            $transformations = $data["transformations"];
+            unset($data["originPlanet"], $data["transformations"]);
+            $data["deletedAt"] = "null";
+            $characters = json_encode($data);
+            $characters = $this->serializer->deserialize($characters, Character::class, 'json');
+            $characters->setPlanet($this->getReference(PlanetFixtures::PLANET_CHARACTER_REFERENCE . $idplanet)); // $characters
+            $characters->setDeletedAt('null');
+            $characters->setTransformation($transformations);
+            /*
+            $planet = json_encode($data["originPlanet"]);
+            $planet = $this->serializer->deserialize($planet, Planet::class, 'json');
+            $namePlanet = $planet->getName(); 
 
-        /*
-                            //$transformations = json_encode($value["transformations"]);
-                            //unset($data["originPlanet"], $data["transformations"]);
-                            //echo json_encode($value["originPlanet"]["name"]);
-                            
-                                        $character = [
-                                            $data,
-                                            ...$value["originPlanet"]["name"],
 
-                                        ];
-                            
-                            // echo json_encode($data["transformations"]);
+
+
+
+
+ 
+                        foreach ($arrayPlanets as $planet) {
+                            $planet = json_decode(json_encode($planet), true);
+                            if ($planet["id"] == $idplanet) {
+                                $characters->setPlanet($planet);
+                            }
+
                         }
+            
 
-                */
-        /*
+
+            $manager->persist($characters);
+
+
+
+
+
+
+        }
+        $manager->flush();
+    }
+    public function getDependencies()
+    {
+        return [
+            PlanetFixtures::class,
+        ];
+    }  
+}
+ 
+         
+                              //
+                              
+                                          $character = [
+                                              $data,
+                                              ...$value["originPlanet"]["name"],
+
+                                          ];
+                              
+                              // echo json_encode($data["transformations"]);
+                          }
+
+                  
+       
         foreach ($data as $value) {
 
             $user = new User();
@@ -134,7 +160,7 @@ class AppFixtures extends Fixture
 
         }
         $manager->flush();
-        /*
+        
                 // Fixtures API
                 $data = $this->loadData('localPlanets.json');
                 foreach ($data as $value) {
@@ -170,9 +196,11 @@ class AppFixtures extends Fixture
                     $manager->persist($character);
 
                 }
- */
-        // $manager->flush();
-        //echo "Characters created\n";
 
-    }
-}
+        // $manager->flush();
+        //echo "Characters created\n"; 
+        
+        
+        */
+
+

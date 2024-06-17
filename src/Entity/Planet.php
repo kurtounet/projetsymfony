@@ -19,8 +19,6 @@ class Planet
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-
-
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
@@ -134,10 +132,11 @@ class Planet
         return $this->isDestroyed;
     }
 
-    public function setDestroyed(bool $isDestroyed): static
+    public function setIsDestroyed(bool $isDestroyed): static
     {
         $this->isDestroyed = $isDestroyed;
 
         return $this;
     }
+
 }
