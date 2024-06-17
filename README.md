@@ -39,7 +39,7 @@ finir commande pour api
 make:registration
 -> Inscription nouveau utilisateur (ok)
 -> Modifier profile utilisateur (ok) reste modife pwd et email
-#  Admin
+#  Admin easyadmin
 -> CRUD user
 -> CRUD heros
 -> CRUD Planète
