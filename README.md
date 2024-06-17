@@ -1,14 +1,18 @@
 # Projet examen Symfony
 
-A faire:
-ajouter createdat et updateat au entity
-finir commande pour api
+#### A faire:
+##### Ajouter createdat et updateat aux entity
+##### Finir la commande pour appel api
 
 
 # PUBLIC :
 ##### Page acceuil. (fait)
 ##### Page des héros. (fait)
+##### Page planets
+##### Filtre les heros par planets
+##### Filtre par sexe, séries et 
 ##### Page de détail pour chaque héros (clique sur la carte). (fait)
+##### Afficher les user fan du héros sur page détail du heros
 ##### Page formulaire inscription Newsletter (fait)
     - formulaire (fait)
     - validation: 
