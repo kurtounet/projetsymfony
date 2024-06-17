@@ -1,4 +1,4 @@
-# Projet examen Symfony
+###### Projet examen Symfony
 
 A faire:
 ajouter createdat et updateat au entity
@@ -8,6 +8,9 @@ finir commande pour api
 # PUBLIC :
 ##### Page acceuil. (fait)
 ##### Page des héros. (fait)
+##### Page planets
+filtre par planets
+filtre par 
 ##### Page de détail pour chaque héros (clique sur la carte). (fait)
 ##### Page formulaire inscription Newsletter (fait)
     - formulaire (fait)
