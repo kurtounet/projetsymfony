@@ -47,6 +47,7 @@ make:registration
 -> CRUD user
 -> CRUD heros
 -> CRUD Planète
+-> nouveau
 
 
 # FIXTURES:
