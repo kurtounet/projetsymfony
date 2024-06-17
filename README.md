@@ -9,9 +9,10 @@
 ##### Page acceuil. (fait)
 ##### Page des héros. (fait)
 ##### Page planets
-##### Filtrer les heros par planets
+##### Filtre les heros par planets
 ##### Filtre par sexe, séries et 
 ##### Page de détail pour chaque héros (clique sur la carte). (fait)
+##### Afficher les user fan du héros sur page détail du heros
 ##### Page formulaire inscription Newsletter (fait)
     - formulaire (fait)
     - validation: 
