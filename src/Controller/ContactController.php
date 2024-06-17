@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Service\ContactNotification;
+use App\Service\EmailNotification;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,8 +17,8 @@ class ContactController extends AbstractController
     #[Route('/contact', name: 'app_contact')]
     public function contact(
         Request $request,
-        EntityManagerInterface $em
-
+        EntityManagerInterface $em,
+        ContactNotification $econtactNotification
     ): Response {
 
         $contact = new Contact();
@@ -28,6 +30,8 @@ class ContactController extends AbstractController
             $contact->setcreatedAt(new \DateTime());
             $em->persist($contact);
             $em->flush();
+
+            $econtactNotification->sendConfirmationEmail($contact);
             //$this->addFlash('success', 'Votre message a bien été envoyé !');
 
             return $this->redirectToRoute('app_contact_thanks');

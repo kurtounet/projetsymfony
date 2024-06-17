@@ -1,13 +1,15 @@
 # Projet examen Symfony
 
+A faire:
+ajouter createdat et updateat au entity
+finir commande pour api
+
+
 # PUBLIC :
 ##### Page acceuil. (fait)
 ##### Page des héros. (fait)
-
 ##### Page de détail pour chaque héros (clique sur la carte). (fait)
-
 ##### Page formulaire inscription Newsletter (fait)
-
     - formulaire (fait)
     - validation: 
         unique(fait) 
@@ -15,15 +17,12 @@
     - email de notification (fait)
 
 ##### Page formulaire contact (fait)
-
     - formulaire (fait)
     - validation:         
-        champ vide(fait)
+        champ vide (fait)
     - email de notification (fait)
-
-##### Page formulaire contact (fait) + envoyer email de notification (à faire)
-
-## Page inscription + contrainte de validation // user unique
+    - 
+## Page inscription 
 
 ->  authentification (fait)
     page login (fait)
@@ -32,11 +31,8 @@
 # Entity :
 
 ##### User
-
 ##### Character
-
 ##### Planet
-
 ##### Transfomation
 
 #  Utilisateur
