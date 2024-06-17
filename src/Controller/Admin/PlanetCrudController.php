@@ -24,5 +24,14 @@ class PlanetCrudController extends AbstractCrudController
             TextEditorField::new('description'),
         ];
     }
+        public function configurecrud(string $pageName): iterable
+    {
+        return [
+            setPageTitle('index', 'Liste des planetes'),
+            IdField::new('id'),
+            TextField::new('title'),
+            TextEditorField::new('description'),
+        ];
+    }
     */
 }

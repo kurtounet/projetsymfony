@@ -9,18 +9,25 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 class AppFixtures extends Fixture
 {
 
-    public function __construct(private UserPasswordHasherInterface $hasher)
-    {
+    public function __construct(
+        private UserPasswordHasherInterface $hasher,
+        private SerializerInterface $serializer
+    ) {
     }
 
     private function loadData($file)
     {
         $filename = __DIR__ . '/' . $file;
+        return file_get_contents($filename);
+
+        /*
         echo $filename;
 
 
@@ -37,20 +44,49 @@ class AppFixtures extends Fixture
             return null;
         }
 
+
         // Decode the JSON data
         $data = json_decode($fileContents, true);
         if ($data === null) {
             echo "Erreur : échec du décodage JSON.";
             return null;
         }
-
-        return $data;
+*/
+        // return $data;
 
     }
     public function load(ObjectManager $manager): void
     {
         // Fixtures User
-        $data = $this->loadData('user.json');
+        /* $data = $this->loadData('user.json');
+         $users = $this->serializer->deserialize($data, User::class . '[]', 'json');
+         dd($users);*/
+        //$manager->persist($users);
+
+        $data = json_decode($this->loadData('charactersApi.json'), true);
+
+
+        foreach ($data as $value) {
+            $planet = $value["originPlanet"];
+            echo json_encode($planet);
+        }
+
+        /*
+                            //$transformations = json_encode($value["transformations"]);
+                            //unset($data["originPlanet"], $data["transformations"]);
+                            //echo json_encode($value["originPlanet"]["name"]);
+                            
+                                        $character = [
+                                            $data,
+                                            ...$value["originPlanet"]["name"],
+
+                                        ];
+                            
+                            // echo json_encode($data["transformations"]);
+                        }
+
+                */
+        /*
         foreach ($data as $value) {
 
             $user = new User();
@@ -134,9 +170,9 @@ class AppFixtures extends Fixture
                     $manager->persist($character);
 
                 }
+ */
+        // $manager->flush();
+        //echo "Characters created\n";
 
-                $manager->flush();
-                echo "Characters created\n";
-        */
     }
 }

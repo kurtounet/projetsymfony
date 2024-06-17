@@ -6,7 +6,7 @@
     "password": "pwd1",
     "roles": ["ROLE_ADMIN"],
     "avatar": "assets/avatar1.jpg",
-    "characterPref": 1
+    "CharacterPref": 1
   },
   {
     "firstName": "Jane",
@@ -15,7 +15,7 @@
     "password": "pwd2",
     "roles": ["ROLE_USER"],
     "avatar": "assets/avatar2.jpg",
-    "characterPref": 2
+    "CharacterPref": 2
   },
   {
     "firstName": "Alice",
@@ -24,7 +24,7 @@
     "password": "pwd3",
     "roles": ["ROLE_ADMIN"],
     "avatar": "assets/avatar3.jpg",
-    "characterPref": 1
+    "CharacterPref": 1
   },
   {
     "firstName": "Bob",
@@ -33,7 +33,7 @@
     "password": "pwd4",
     "roles": ["ROLE_ADMIN"],
     "avatar": "assets/avatar4.jpg",
-    "characterPref": 2
+    "CharacterPref": 2
   },
   {
     "firstName": "Carol",
@@ -42,7 +42,7 @@
     "password": "pwd5",
     "roles": ["ROLE_USER"],
     "avatar": "assets/avatar5.jpg",
-    "characterPref": 1
+    "CharacterPref": 1
   },
   {
     "firstName": "David",
@@ -51,7 +51,7 @@
     "password": "pwd6",
     "roles": ["ROLE_ADMIN"],
     "avatar": "assets/avatar6.jpg",
-    "characterPref": 2
+    "CharacterPref": 2
   },
   {
     "firstName": "Eva",
@@ -60,7 +60,7 @@
     "password": "pwd7",
     "roles": ["ROLE_USER"],
     "avatar": "assets/avatar7.jpg",
-    "characterPref": 1
+    "CharacterPref": 1
   },
   {
     "firstName": "Frank",
@@ -69,7 +69,7 @@
     "password": "pwd8",
     "roles": ["ROLE_ADMIN"],
     "avatar": "assets/avatar8.jpg",
-    "characterPref": 2
+    "CharacterPref": 2
   },
   {
     "firstName": "Grace",
@@ -78,7 +78,7 @@
     "password": "pwd9",
     "roles": ["ROLE_USER"],
     "avatar": "assets/avatar9.jpg",
-    "characterPref": 1
+    "CharacterPref": 1
   },
   {
     "firstName": "Henry",
@@ -87,6 +87,6 @@
     "password": "pwd10",
     "roles": ["ROLE_ADMIN"],
     "avatar": "assets/avatar10.jpg",
-    "characterPref": 1
+    "CharacterPref": 1
   }
 ]

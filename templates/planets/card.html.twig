@@ -1,0 +1,11 @@
+<a href="{{ path('app_planet', {id: planet.id})}}">
+  <div class="bg-gray-200 m-5 max-w-sm mx-auto rounded-lg shadow-md gap-1"
+    style="width: 200px; height: 200px;">    
+    <div class="text-center mt-4">
+        <p class="text-red-500 text-lg font-semibold">{{ planet.name }}</p>   
+        <img class="object-scale-down h-40 w-96 overflow-hidden rounded-lg" src="{{ planet.image }}" alt="{{ planet.name }}" >      
+         
+    </div>    
+  </div>
+</a>
+ 
