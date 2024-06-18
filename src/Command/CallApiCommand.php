@@ -58,24 +58,28 @@ class CallApiCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
+
+        $planets = json_decode($this->callApiService->getData(self::INFO_PLANET), true);
+        $totalItems = $planets["meta"]["itemsPerPage"] * $planets["meta"]["totalPages"];
+        $planets = json_decode($this->callApiService->getData(self::INFO_PLANET . "?page=1&limit=$totalItems"), true);
+        file_put_contents(
+            __DIR__ . self::DIR_FIXTURES . 'Planets.json',
+            json_encode($planets)
+        );
         /*
-                $planets = json_decode($this->callApiService->getData(self::INFO_PLANET), true);
-                $totalItems = $planets["meta"]["itemsPerPage"] * $planets["meta"]["totalPages"];
-                $planets = json_decode($this->callApiService->getData(self::INFO_PLANET . "?page=1&limit=$totalItems"), true);
+        foreach ($planets['items'] as $item) {
+            $planet = new Planet();
+            $planet->setName($item['name']);
+            $planet->setIsDestroyed($item['isDestroyed']);
+            $planet->setDescription($item['description']);
+            $planet->setDeletedAt($item['deletedAt']);
+            $planet->setImage($item['image']);
+            $this->entityManager->persist($planet);
+        }
+            
+        $this->entityManager->flush();
+        $io->success(' Toutes les planètes ont été importées!');
 
-                foreach ($planets['items'] as $item) {
-                    $planet = new Planet();
-                    $planet->setName($item['name']);
-                    $planet->setDestroyed($item['isDestroyed']);
-                    $planet->setDescription($item['description']);
-                    $planet->setDeletedAt($item['deletedAt']);
-                    $planet->setImage($item['image']);
-                    $this->entityManager->persist($planet);
-                }
-                $this->entityManager->flush();
-                $io->success(' Toutes les planètes ont été importées!');
-
-        */
 
         /*
         PROBLEME: les Id des characters ne suivent pas( il y a des plage vide).
@@ -104,64 +108,127 @@ class CallApiCommand extends Command
             json_encode($character)
         );
         $io->success('Fichier charactersApi.json a été crée dans le dossier: src/DataFixtures');
-        /* 3eme appel à l API pour récuperer un par un les id.
-        foreach ($ids as $id) {
-            $character = new Character();
-            $character = $this->callApiService->getData(self::INFO_CHARACTER . "/$id");
+
+
+
+        echo "CHARGEMENT DES DONNES EN BASE DE DONNÉES" . PHP_EOL;
+        echo "chargement des planets en base de Données" . PHP_EOL;
+
+        $filename = __DIR__ . '/LocalPlanets.json';
+        $file_content = file_get_contents($filename);
+        $planetsArray = $this->serializer->deserialize($file_content, Planet::class . '[]', 'json');
+        foreach ($planetsArray as $planet) {
+            $this->entityManager->persist($planet);
+            // $this->setReference(self::PLANET_REFERENCE . $planet->getId(), $planet);
+        }
+
+        // $manager->flush();
+
+
+        echo "chargement des characters" . PHP_EOL;
+        $filename = __DIR__ . '/LocalCharacters.json';
+        $file_content = file_get_contents($filename);
+        //$characters = $this->serializer->deserialize($file_content, Character::class . '[]', 'json');
+
+        $file_content = json_decode($file_content, true);
+        $characters = [];
+        // dd($characters);
+        foreach ($file_content as $character) {
+            $characters[] = $character;
+            // Récupère le nom de la planète du charactère
+            $planetName = $character["originPlanet"]["name"];
+            // Récupère les transformations du charactère
+            $transformations = $character["transformations"];
+            // supprimer les proprietés originPlanet et transformations pour laisser seulement 
+            //le character -> Entity Character
+            unset($character["originPlanet"], $character["transformations"]);
+            //convertir null en string "null"
+            $character["deletedAt"] = "null";
+            $character = json_encode($character);
             $character = $this->serializer->deserialize($character, Character::class, 'json');
-            $this->entityManager->persist($character);
-        }
-        $this->entityManager->flush();*/
-        /*
-        $totalItems = $characters["meta"]["itemsPerPage"] * $characters["meta"]["totalPages"];
-        $characters = json_decode($this->callApiService->getData(self::INFO_CHARACTER . "?page=1&limit=$totalItems"), true);
-        echo $characters['items'][0]['id'];*/
-        /*
-        foreach ($characters['items'] as $item) {
-            $character = new Character();
-            $character->setName($item['name']);
-            $character->setDescription($item['description']);
-            $this->entityManager->persist($character);
-        }
-        $this->entityManager->flush();*/
-
-
-
-
-
-
-
-
-        /*
-                // Fetch and deserialize all planets
-                $planetData = json_decode($this->callApiService->getData(self::INFO_PLANET . "?page=1&limit=1000"), true);
-                foreach ($planetData["items"] as $planetJson) {
-                    // Assuming each $planetJson is a JSON string of a single Planet object
-                    $planet = $this->serializer->deserialize(json_encode($planetJson), Planet::class, 'json');
-                    $this->entityManager->persist($planet);
-
-                    // Optional: Output the planet data for debugging
-                    echo json_encode($planetJson) . "\n";
+            // Attacher le charactère à la planète
+            foreach ($planetsArray as $planet) {
+                if ($planet->getName() === $planetName) {
+                    $character->setPlanet($planet); // $planet->getName();
+                    break; // On peut arrêter la boucle dès qu'on trouve la personne
                 }
-                $this->entityManager->flush();
-                /*
-                foreach ($planets as $planet) {
-                    $this->entityManager->persist($planet);
-                }
-                $this->entityManager->flush(); 
-                $io->success('All planets have been imported successfully!');
-                /*
-                        // Fetch and deserialize characters
-                        $characterData = $this->callApiService->getData(self::INFO_CHARACTER . "?page=1&limit=1000");
-                        $characters = $this->serializer->deserialize($characterData, 'App\Entity\Character[]', 'json');
-                        foreach ($characters as $character) {
-                            $this->entityManager->persist($character);
-                        }
-                        $this->entityManager->flush();
-                        $io->success('All characters have been imported successfully!');
-                */
+            }
+            $character->setTransformation($transformations);
+            $this->entityManager->persist($character);
+
+        }
+
+        echo "chargement des User" . PHP_EOL;
+
+        $filename = __DIR__ . '/user.json';
+        $file_content = file_get_contents($filename);
+        $UserArray = $this->serializer->deserialize($file_content, User::class . '[]', 'json');
+
+        foreach ($UserArray as $user) {
+            $user->setUserName($user->getFirstName() . $user->getLastName());
+            $user->setPassword($user->getPassword());
+            // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
+            $this->entityManager->persist($user);
+        }
+        $this->entityManager->flush();
 
 
         return Command::SUCCESS;
     }
 }
+/* 3eme appel à l API pour récuperer un par un les id.
+       foreach ($ids as $id) {
+           $character = new Character();
+           $character = $this->callApiService->getData(self::INFO_CHARACTER . "/$id");
+           $character = $this->serializer->deserialize($character, Character::class, 'json');
+           $this->entityManager->persist($character);
+       }
+       $this->entityManager->flush();*/
+/*
+$totalItems = $characters["meta"]["itemsPerPage"] * $characters["meta"]["totalPages"];
+$characters = json_decode($this->callApiService->getData(self::INFO_CHARACTER . "?page=1&limit=$totalItems"), true);
+echo $characters['items'][0]['id'];*/
+/*
+foreach ($characters['items'] as $item) {
+    $character = new Character();
+    $character->setName($item['name']);
+    $character->setDescription($item['description']);
+    $this->entityManager->persist($character);
+}
+$this->entityManager->flush();*/
+
+
+
+
+
+
+
+
+/*
+        // Fetch and deserialize all planets
+        $planetData = json_decode($this->callApiService->getData(self::INFO_PLANET . "?page=1&limit=1000"), true);
+        foreach ($planetData["items"] as $planetJson) {
+            // Assuming each $planetJson is a JSON string of a single Planet object
+            $planet = $this->serializer->deserialize(json_encode($planetJson), Planet::class, 'json');
+            $this->entityManager->persist($planet);
+
+            // Optional: Output the planet data for debugging
+            echo json_encode($planetJson) . "\n";
+        }
+        $this->entityManager->flush();
+        /*
+        foreach ($planets as $planet) {
+            $this->entityManager->persist($planet);
+        }
+        $this->entityManager->flush(); 
+        $io->success('All planets have been imported successfully!');
+        /*
+                // Fetch and deserialize characters
+                $characterData = $this->callApiService->getData(self::INFO_CHARACTER . "?page=1&limit=1000");
+                $characters = $this->serializer->deserialize($characterData, 'App\Entity\Character[]', 'json');
+                foreach ($characters as $character) {
+                    $this->entityManager->persist($character);
+                }
+                $this->entityManager->flush();
+                $io->success('All characters have been imported successfully!');
+        */

@@ -1,59 +1,48 @@
 <?php
-
 namespace App\Service;
 
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class DownloadImageService
 {
-    private $client;
 
-    public function __construct(HttpClientInterface $client)
-    {
-        $this->client = $client;
+
+    public function __construct(
+        private HttpClientInterface $client,
+        private string $pathDownloadsImagesCharacters,
+        private string $pathDownloadsImagesPlanets,
+        private string $pathDownloadsImagesTransformations
+    ) {
+
     }
 
-
-    public function downloadImage($url, $path): array|string
+    public function downloadImage(string $url, string $path): bool
     {
+        $filesystem = new Filesystem();
 
         try {
-            $content = file_get_contents("https://dragonball-api.com/characters/goku_normal.webp");
+            $response = $this->client->request('GET', $url);
+            if ($response->getStatusCode() === 200) {
+                $content = $response->getContent();
 
-            //Store in the filesystem.
-            $fp = fopen("/location/to/save/image.jpg", "w");
-            fwrite($fp, $content);
-            fclose($fp);
-            /*
-            $reponse = $this->client->request('GET', $url)->getContent();
-            //return $reponse;
-            // Initialiser CURL
-            $ch = curl_init($url);
+                // Ensure directory exists
+                $directory = dirname($path);
+                if (!$filesystem->exists($directory)) {
+                    $filesystem->mkdir($directory, 0755);
+                }
 
-            // Définir les options de CURL
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
-
-            // Télécharger l'image
-            $raw = curl_exec($ch);
-            curl_close($ch);
-
-            if (file_exists($path)) {
-                unlink($path); // Assurez-vous de ne pas avoir de fichier dupliqué
-            }*/
-
-            // Sauvegarder le fichier
-            /*
-            if (file_put_contents($path, $raw)) {
-                return "Image téléchargée avec succès.";
-            } else {
-                return "Échec du téléchargement de l'image.";
-            }*/
+                // Save the file
+                $filesystem->dumpFile($path, $content);
+                return true;
+            }
         } catch (\Exception $e) {
+            // Log the error message or handle it as needed
+// e.g., $logger->error($e->getMessage());
             return false;
         }
-    }
 
+        return false;
+    }
 }

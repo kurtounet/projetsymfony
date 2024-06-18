@@ -23,7 +23,8 @@ class RegistrationController extends AbstractController
         UserPasswordHasherInterface $userPasswordHasher,
         Security $security,
         EntityManagerInterface $entityManager,
-        SluggerInterface $slugger
+        SluggerInterface $slugger,
+        string $pathImagesAvatars
     ): Response {
         $user = new User();
         $user->setAvatar('avatar1.jpg');

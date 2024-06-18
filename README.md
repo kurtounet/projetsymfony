@@ -1,37 +1,38 @@
 # Projet examen Symfony
 
 #### A faire:
+##### Filtre les heros par planets
+##### Filtre par sexe, séries  
+#### redirection profile edit + supp champ password
+#### dir avatar + image
+#### download image dbz call-api
 ##### Ajouter createdat et updateat aux entity
-##### Finir la commande pour appel api
-##### Subscriber
+ 
+ 
 download image
 
 # PUBLIC :
 ##### Page acceuil. (fait)
-##### Page des héros. (fait)
-##### Page planets
-##### Filtre les heros par planets
-##### Filtre par sexe, séries et 
-##### Page de détail pour chaque héros (clique sur la carte). (fait)
-##### Afficher les user fan du héros sur page détail du heros
+##### Page liste des héros. (fait)
+##### Page détail héros. (fait)
+##### Page liste planets
+##### Page détail planets
 ##### Page formulaire inscription Newsletter (fait)
+##### Page formulaire inscription  (fait)
     - formulaire (fait)
-    - validation: 
-        unique(fait) 
-        champ vide (fait)
+    - validation (fait)         
     - email de notification (fait)
+    - HashPassword avec Subcriber (fait)
 
 ##### Page formulaire contact (fait)
     - formulaire (fait)
-    - validation:         
-        champ vide (fait)
+    - validation  (fait)
     - email de notification (fait)
-    - 
+    
 ## Page inscription 
-
 ->  authentification (fait)
-    page login (fait)
-    authentification (fait)
+->    page login (fait)
+->    authentification (fait)
 
 # Entity :
 

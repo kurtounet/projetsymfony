@@ -32,10 +32,7 @@ class HashUserPasswordSubscriber implements EventSubscriberInterface
         }
 
         $entity->setPassword(
-            $this->hasher->hashPassword(
-                $entity,
-                $entity->getPassword()
-            )
+            $this->hasher->hashPassword($entity, $entity->getPassword())
         );
     }
 }

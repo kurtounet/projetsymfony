@@ -87,7 +87,8 @@ class AppFixtures extends Fixture
 
         foreach ($UserArray as $user) {
             $user->setUserName($user->getFirstName() . $user->getLastName());
-            $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
+            $user->setPassword($user->getPassword());
+            // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
             $manager->persist($user);
         }
         $manager->flush();
