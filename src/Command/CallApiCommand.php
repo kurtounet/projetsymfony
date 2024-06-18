@@ -6,6 +6,7 @@ use App\Entity\Character;
 use App\Entity\Planet;
 use App\Repository\PlanetRepository;
 use App\Service\CallApiService;
+use App\Service\DownloadImageService;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -35,6 +36,7 @@ class CallApiCommand extends Command
     public function __construct(
         SerializerInterface $serializer,
         CallApiService $callApiService,
+        DownloadImageService $downloadImageService,
         EntityManagerInterface $entityManager,
         PlanetRepository $planetRepository
     ) {
@@ -55,11 +57,6 @@ class CallApiCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-
-
-
-
-
 
         /*
                 $planets = json_decode($this->callApiService->getData(self::INFO_PLANET), true);

@@ -34,12 +34,9 @@ class RegistrationController extends AbstractController
             // Donne les role par defaut 
             $user->setRoles(["ROLE_USER"]);
             // Hash le mot de passe
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+            //
+            $user->setPassword($form->get('plainPassword')->getData());
+
             /** 
              * @var \Symfony\Component\HttpFoundation\File\UploadedFile $avatar 
              * */
