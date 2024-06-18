@@ -58,20 +58,18 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         // Fixtures User
-        /* $data = $this->loadData('user.json');
-         $users = $this->serializer->deserialize($data, User::class . '[]', 'json');
-         dd($users);*/
-        //$manager->persist($users);
+        /*
+         $data = $this->loadData('user.json');
+         $users = $this->serializer->deserialize($data, User::class . '[]', 'json');         
+         $manager->persist($users);
 
         $data = json_decode($this->loadData('charactersApi.json'), true);
-
-
         foreach ($data as $value) {
             $planet = $value["originPlanet"];
             echo json_encode($planet);
         }
 
-        /*
+        
                             //$transformations = json_encode($value["transformations"]);
                             //unset($data["originPlanet"], $data["transformations"]);
                             //echo json_encode($value["originPlanet"]["name"]);
@@ -85,10 +83,9 @@ class AppFixtures extends Fixture
                             // echo json_encode($data["transformations"]);
                         }
 
-                */
-        /*
+         */
+        $data = json_decode($this->loadData('user.json'), true);
         foreach ($data as $value) {
-
             $user = new User();
             $user->setFirstName($value['firstName']);
             $user->setLastName($value['lastName']);
@@ -102,10 +99,10 @@ class AppFixtures extends Fixture
             $manager->persist($user);
         }
         echo "Fixtures User created\n";
-        $data = $this->loadData('charactersApi.json');
 
+        $data = json_decode($this->loadData('charactersApi.json'), true);
+        ;
         foreach ($data as $value) {
-
             $character = new Character();
             $character->setName($value['name']);
             $character->setKi($value['ki']);
@@ -170,9 +167,9 @@ class AppFixtures extends Fixture
                     $manager->persist($character);
 
                 }
- */
+
         // $manager->flush();
         //echo "Characters created\n";
-
+*/
     }
 }
