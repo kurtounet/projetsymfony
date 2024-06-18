@@ -1,5 +1,12 @@
 # Projet examen Symfony
 
+# FIXTURES:
+    charger la base de donnée a partir d'une api (https://web.dragonball-api.com/)
+    avec HTTPclient.
+commande pour :
+- appel API : symfony console call-api
+- 
+
 #### A faire:
 ##### Filtre les heros par planets
 ##### Filtre par sexe, séries  
@@ -9,7 +16,7 @@
 ##### Ajouter createdat et updateat aux entity
  
  
-download image
+en cour download image
 
 # PUBLIC :
 ##### Page acceuil. (fait)
@@ -31,30 +38,26 @@ download image
     
 ## Page inscription 
 ->  authentification (fait)
-->    page login (fait)
-->    authentification (fait)
+->  page login (fait)
+->  authentification (fait)
 
 # Entity :
 
 ##### User
 ##### Character
 ##### Planet
-##### Transfomation
+ 
 
 #  Utilisateur
-make:registration
+ 
 -> Inscription nouveau utilisateur (ok)
--> Modifier profile utilisateur (ok) reste modife pwd et email
+-> Modifier profile utilisateur (ok), reste modife pwd()
 #  Admin easyadmin
--> CRUD user
--> CRUD heros
--> CRUD Planète
--> nouveau
+-> CRUD user (a faire) 
+-> CRUD heros (a faire)
+-> CRUD Planète (a faire)
 
 
-# FIXTURES:
-    charger la base de donnée a partir d'une api (https://web.dragonball-api.com/)
-    avec HTTPclient.
 
 Commande mise a jours api
 
