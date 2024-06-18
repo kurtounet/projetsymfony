@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Character;
 use App\Repository\CharacterRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\Attribute\Context;
 
 class HerosController extends AbstractController
 {
@@ -15,14 +17,19 @@ class HerosController extends AbstractController
         $characters = $characterRepository->findAll();
         return $this->render('heros/listheros.html.twig', [
             'heros' => $characters,
+
         ]);
     }
+
     #[Route('/heros/{id}', name: 'app_hero')]
-    public function hero(CharacterRepository $characterRepository, int $id): Response
+    public function hero(Character $character): Response
     {
-        $hero = $characterRepository->find($id);
+
         return $this->render('heros/hero.html.twig', [
-            'hero' => $hero,
+            'hero' => $character,
+            'planet' => $character->getPlanet(),
+
+
         ]);
 
 

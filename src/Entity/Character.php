@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CharacterRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: CharacterRepository::class)]
 #[ORM\Table(name: '`character`')]
@@ -46,6 +47,7 @@ class Character
     private ?array $transformation = null;
 
     #[ORM\ManyToOne(inversedBy: 'characters')]
+    #[Groups('hero:read')]
     private ?Planet $planet = null;
 
     public function getId(): ?int

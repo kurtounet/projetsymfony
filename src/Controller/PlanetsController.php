@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Planet;
 use App\Repository\PlanetRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +19,9 @@ class PlanetsController extends AbstractController
         ]);
     }
     #[Route('/planets/{id}', name: 'app_planet')]
-    public function planet(int $id, PlanetRepository $planetRepository): Response
+    public function planet(Planet $planet): Response
     {
-        $planet = $planetRepository->findById($id);
-        return $this->render('planets/Planet.html.twig', [
+        return $this->render('planets/planet.html.twig', [
             'planet' => $planet,
         ]);
     }
