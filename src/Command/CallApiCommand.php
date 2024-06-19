@@ -58,7 +58,7 @@ class CallApiCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-
+        // PLANETS
         $planets = json_decode($this->callApiService->getData(self::INFO_PLANET), true);
         $totalItems = $planets["meta"]["itemsPerPage"] * $planets["meta"]["totalPages"];
         $planets = json_decode($this->callApiService->getData(self::INFO_PLANET . "?page=1&limit=$totalItems"), true);
@@ -69,7 +69,7 @@ class CallApiCommand extends Command
             echo 'téléchargement de : ' . $item['image'] . "\n";
             $this->downloadImageService->downloadImage(
                 $item['image'],
-                'public/assets/downloads/planets/' . $nameImage
+                'public/assets/planets/' . $nameImage
             );
         }
         // Sauvegarde des planètes dans le fichier json
@@ -79,111 +79,143 @@ class CallApiCommand extends Command
         );
 
         /*
-        foreach ($planets['items'] as $item) {
-            $planet = new Planet();
-            $planet->setName($item['name']);
-            $planet->setIsDestroyed($item['isDestroyed']);
-            $planet->setDescription($item['description']);
-            $planet->setDeletedAt($item['deletedAt']);
-            $planet->setImage($item['image']);
-            $this->entityManager->persist($planet);
-        }
-            
-        $this->entityManager->flush();
-        $io->success(' Toutes les planètes ont été importées!');
-
-
+                foreach ($planets['items'] as $item) {
+                    $planet = new Planet();
+                    $planet->setName($item['name']);
+                    $planet->setIsDestroyed($item['isDestroyed']);
+                    $planet->setDescription($item['description']);
+                    $planet->setDeletedAt($item['deletedAt']);
+                    $planet->setImage($item['image']);
+                    $this->entityManager->persist($planet);
+                }
+                   
+                $this->entityManager->flush();
+                $io->success(' Toutes les planètes ont été importées!');
+        */
+        // CHARACTERS
         /*
         PROBLEME: les Id des characters ne suivent pas( il y a des plage vide).
         RESOLUTION: Récupérer tout id existant, puis récupérer les personnage un par
         un, car qui ils contiennet les données, des planètes et des transformations.
-        */
-        /* 1er appel à l API pour récuperer itemsPerPage et totalPages.*/
+        
+        // 1er appel à l API pour récuperer itemsPerPage et totalPages.
         $characters = json_decode($this->callApiService->getData(self::ENDPOINT_CHARACTER), true);
         $totalItems = $characters["meta"]["itemsPerPage"] * $characters["meta"]["totalPages"];
-        /* 2eme appel à l API pour récuperer tout les id*/
-        $characters = json_decode($this->callApiService->getData(self::ENDPOINT_CHARACTER . "?page=1&limit=$totalItems"), true);
+        /// 2eme appel à l API pour récuperer tout les id
+        $characters = $this->callApiService->getData(self::ENDPOINT_CHARACTER . "?page=1&limit=$totalItems");
+        //var_dump($characters);
+
         $ids = [];
         $i = 1;
-        /* 3eme appel à 1 par 1 les characters id.*/
-        foreach ($characters['items'] as $item) {
+        // 3eme appel à 1 par 1 les characters id. 
+
+        foreach (json_decode($characters, true)['items'] as $item) {
+
             $ids[] = $item['id'];
-            $character[] = $this->callApiService->getData(self::ENDPOINT_CHARACTER . '/' . $item['id']);
-            echo $i++ . '/' . count($characters['items']) . ' - ' . $item['name'] . ': OK' . PHP_EOL;
+            echo 'Image Characters : ' . $item['image'] . "\n";
+            $tabNameImage = explode('/', $item['image']);
+            $nameImage = end($tabNameImage);
+
+            $this->downloadImageService->downloadImage(
+                $item['image'],
+                'public/assets/characters/' . $nameImage
+            );
+
+            $character = $this->callApiService->getData(self::ENDPOINT_CHARACTER . '/' . $item['id']);
+            // Téléchargement des image de transformations
+
+            foreach (json_decode($character, true)['transformations'] as $transformation) {
+                $url = $transformation['image'];
+                $nameTransformationImage = explode('/', $transformation['image']);
+                $this->downloadImageService->downloadImage(
+                    $url,
+                    'public/assets/transformations/' . end($nameTransformationImage)
+                );
+
+                echo 'Image Transformation : ' . $url . PHP_EOL;
+            }
+            
+                        $tabTransformationImage = explode('/', $character["transformations"]['image']);
+                        $character = json_decode($character, true);
+            
+            $Allcharacters[] = $character;
+            // echo ' - ' . json_decode($character, true)['name'] . ': OK' . PHP_EOL;
         }
+*/
+/*
 
         $io->success('Tous les personnages ont été importés ! ' . PHP_EOL);
         echo 'Liste des id :' . PHP_EOL;
         echo json_encode($ids, true);
         file_put_contents(
             __DIR__ . self::DIR_FIXTURES . 'charactersApi.json',
-            json_encode($character)
+            json_encode($Allcharacters)
         );
         $io->success('Fichier charactersApi.json a été crée dans le dossier: src/DataFixtures');
+*/
 
+        /*
+                echo "CHARGEMENT DES DONNES EN BASE DE DONNÉES" . PHP_EOL;
+                echo "chargement des planets en base de Données" . PHP_EOL;
 
-
-        echo "CHARGEMENT DES DONNES EN BASE DE DONNÉES" . PHP_EOL;
-        echo "chargement des planets en base de Données" . PHP_EOL;
-
-        $filename = __DIR__ . '/LocalPlanets.json';
-        $file_content = file_get_contents($filename);
-        $planetsArray = $this->serializer->deserialize($file_content, Planet::class . '[]', 'json');
-        foreach ($planetsArray as $planet) {
-            $this->entityManager->persist($planet);
-            // $this->setReference(self::PLANET_REFERENCE . $planet->getId(), $planet);
-        }
-
-        // $manager->flush();
-
-
-        echo "chargement des characters" . PHP_EOL;
-        $filename = __DIR__ . '/LocalCharacters.json';
-        $file_content = file_get_contents($filename);
-        //$characters = $this->serializer->deserialize($file_content, Character::class . '[]', 'json');
-
-        $file_content = json_decode($file_content, true);
-        $characters = [];
-        // dd($characters);
-        foreach ($file_content as $character) {
-            $characters[] = $character;
-            // Récupère le nom de la planète du charactère
-            $planetName = $character["originPlanet"]["name"];
-            // Récupère les transformations du charactère
-            $transformations = $character["transformations"];
-            // supprimer les proprietés originPlanet et transformations pour laisser seulement 
-            //le character -> Entity Character
-            unset($character["originPlanet"], $character["transformations"]);
-            //convertir null en string "null"
-            $character["deletedAt"] = "null";
-            $character = json_encode($character);
-            $character = $this->serializer->deserialize($character, Character::class, 'json');
-            // Attacher le charactère à la planète
-            foreach ($planetsArray as $planet) {
-                if ($planet->getName() === $planetName) {
-                    $character->setPlanet($planet); // $planet->getName();
-                    break; // On peut arrêter la boucle dès qu'on trouve la personne
+                $filename = __DIR__ . '/LocalPlanets.json';
+                $file_content = file_get_contents($filename);
+                $planetsArray = $this->serializer->deserialize($file_content, Planet::class . '[]', 'json');
+                foreach ($planetsArray as $planet) {
+                    $this->entityManager->persist($planet);
+                    // $this->setReference(self::PLANET_REFERENCE . $planet->getId(), $planet);
                 }
-            }
-            $character->setTransformation($transformations);
-            $this->entityManager->persist($character);
 
-        }
+                // $manager->flush();
 
-        echo "chargement des User" . PHP_EOL;
 
-        $filename = __DIR__ . '/user.json';
-        $file_content = file_get_contents($filename);
-        $UserArray = $this->serializer->deserialize($file_content, User::class . '[]', 'json');
+                echo "chargement des characters" . PHP_EOL;
+                $filename = __DIR__ . '/LocalCharacters.json';
+                $file_content = file_get_contents($filename);
+                //$characters = $this->serializer->deserialize($file_content, Character::class . '[]', 'json');
 
-        foreach ($UserArray as $user) {
-            $user->setUserName($user->getFirstName() . $user->getLastName());
-            $user->setPassword($user->getPassword());
-            // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
-            $this->entityManager->persist($user);
-        }
-        $this->entityManager->flush();
+                $file_content = json_decode($file_content, true);
+                $characters = [];
+                // dd($characters);
+                foreach ($file_content as $character) {
+                    $characters[] = $character;
+                    // Récupère le nom de la planète du charactère
+                    $planetName = $character["originPlanet"]["name"];
+                    // Récupère les transformations du charactère
+                    $transformations = $character["transformations"];
+                    // supprimer les proprietés originPlanet et transformations pour laisser seulement 
+                    //le character -> Entity Character
+                    unset($character["originPlanet"], $character["transformations"]);
+                    //convertir null en string "null"
+                    $character["deletedAt"] = "null";
+                    $character = json_encode($character);
+                    $character = $this->serializer->deserialize($character, Character::class, 'json');
+                    // Attacher le charactère à la planète
+                    foreach ($planetsArray as $planet) {
+                        if ($planet->getName() === $planetName) {
+                            $character->setPlanet($planet); // $planet->getName();
+                            break; // On peut arrêter la boucle dès qu'on trouve la personne
+                        }
+                    }
+                    $character->setTransformation($transformations);
+                    $this->entityManager->persist($character);
 
+                }
+
+                echo "chargement des User" . PHP_EOL;
+
+                $filename = __DIR__ . '/user.json';
+                $file_content = file_get_contents($filename);
+                $UserArray = $this->serializer->deserialize($file_content, User::class . '[]', 'json');
+
+                foreach ($UserArray as $user) {
+                    $user->setUserName($user->getFirstName() . $user->getLastName());
+                    $user->setPassword($user->getPassword());
+                    // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
+                    $this->entityManager->persist($user);
+                }
+                $this->entityManager->flush();
+        */
 
         return Command::SUCCESS;
     }
