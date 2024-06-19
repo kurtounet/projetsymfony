@@ -41,16 +41,17 @@ class AppFixtures extends Fixture
         $planetsArray = $this->serializer->deserialize($file_content, Planet::class . '[]', 'json');
         foreach ($planetsArray as $planet) {
             $localImage = explode('/', $planet->getImage());
-            $planet->setImage('planets/' . end($localImage));
+            $planet->setImage('assets/planets/' . end($localImage));
             echo end($localImage) . PHP_EOL;
 
             $manager->persist($planet);
         }
 
-        //$manager->flush();
+        $manager->flush();
 
 
 
+        //CHARACTERS
 
         echo "chargement des characters" . PHP_EOL;
         $filename = __DIR__ . '/CharactersAPI.json';
@@ -66,12 +67,11 @@ class AppFixtures extends Fixture
             $planetName = $character["originPlanet"]["name"];
             // Récupère les transformations du charactère
             $transformations = $character["transformations"];
-            /*
-            foreach ($transformations as transformation) {
-                if (is_array($value)) {
-                    $transformations[$key] = json_encode($value);
-                }
-            }*/
+            // Récupère les url de l'image du charactère
+            $imageCharacter = $character["image"];
+
+
+
             // supprimer les proprietés originPlanet et transformations pour laisser seulement 
             //le character -> Entity Character
             unset($character["originPlanet"], $character["transformations"]);
@@ -86,25 +86,34 @@ class AppFixtures extends Fixture
                     break; // On peut arrêter la boucle dès qu'on trouve la personne
                 }
             }
-            $character->setTransformation($transformations);
+            $localImage = explode('/', $character["image"]);
+            $character->setImage('assets/characters/' . end($localImage));
+            $transformationsLocal = [];
+            foreach (json_decode($transformations, true) as $transformation) {
+                $transformation['image'] = $this->pathDownloadsImagesPlanets . $transformation['image'];
+                $nameTransformationImage = explode('/', $transformation['image']);
+                $nameTransformationImage = end($nameTransformationImage);
+            }
+
+            $character->setTransformation($transformationsLocal);
             $manager->persist($character);
 
         }
+        /*
+                        echo "chargement des User" . PHP_EOL;
 
-        echo "chargement des User" . PHP_EOL;
+                        $filename = __DIR__ . '/user.json';
+                        $file_content = file_get_contents($filename);
+                        $UserArray = $this->serializer->deserialize($file_content, User::class . '[]', 'json');
 
-        $filename = __DIR__ . '/user.json';
-        $file_content = file_get_contents($filename);
-        $UserArray = $this->serializer->deserialize($file_content, User::class . '[]', 'json');
-
-        foreach ($UserArray as $user) {
-            $user->setUserName($user->getFirstName() . $user->getLastName());
-            $user->setPassword($user->getPassword());
-            // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
-            $manager->persist($user);
-        }
-        $manager->flush();
-
+                        foreach ($UserArray as $user) {
+                            $user->setUserName($user->getFirstName() . $user->getLastName());
+                            $user->setPassword($user->getPassword());
+                            // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
+                            $manager->persist($user);
+                        }
+                        $manager->flush();
+                */
     }
 
 }

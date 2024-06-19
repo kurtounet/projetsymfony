@@ -62,7 +62,8 @@ class CallApiCommand extends Command
         $planets = json_decode($this->callApiService->getData(self::INFO_PLANET), true);
         $totalItems = $planets["meta"]["itemsPerPage"] * $planets["meta"]["totalPages"];
         $planets = json_decode($this->callApiService->getData(self::INFO_PLANET . "?page=1&limit=$totalItems"), true);
-        // Téléchargement des image des planètes
+
+        // Téléchargement des images des planètes
         foreach ($planets['items'] as $item) {
             $tab = explode('/', $item['image']);
             $nameImage = end($tab);
@@ -142,17 +143,17 @@ class CallApiCommand extends Command
             // echo ' - ' . json_decode($character, true)['name'] . ': OK' . PHP_EOL;
         }
 */
-/*
+        /*
 
-        $io->success('Tous les personnages ont été importés ! ' . PHP_EOL);
-        echo 'Liste des id :' . PHP_EOL;
-        echo json_encode($ids, true);
-        file_put_contents(
-            __DIR__ . self::DIR_FIXTURES . 'charactersApi.json',
-            json_encode($Allcharacters)
-        );
-        $io->success('Fichier charactersApi.json a été crée dans le dossier: src/DataFixtures');
-*/
+                $io->success('Tous les personnages ont été importés ! ' . PHP_EOL);
+                echo 'Liste des id :' . PHP_EOL;
+                echo json_encode($ids, true);
+                file_put_contents(
+                    __DIR__ . self::DIR_FIXTURES . 'charactersApi.json',
+                    json_encode($Allcharacters)
+                );
+                $io->success('Fichier charactersApi.json a été crée dans le dossier: src/DataFixtures');
+        */
 
         /*
                 echo "CHARGEMENT DES DONNES EN BASE DE DONNÉES" . PHP_EOL;

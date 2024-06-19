@@ -3,7 +3,8 @@
     style="width: 200px; height: 200px;">    
     <div class="text-center mt-4">
         <p class="text-red-500 text-lg font-semibold">{{ planet.name }}</p>   
-        <img class="object-scale-down h-40 w-96 overflow-hidden rounded-lg" src="{{ planet.image }}" alt="{{ planet.name }}" >      
+        <img class="object-scale-down h-40 w-96 overflow-hidden rounded-lg" src="{{ asset(planet.image) }}" alt="{{ planet.name }}" >      
+        
          
     </div>    
   </div>
