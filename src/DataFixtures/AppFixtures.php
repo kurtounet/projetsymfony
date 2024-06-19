@@ -27,9 +27,9 @@ class AppFixtures extends Fixture
     public function __construct(
         private UserPasswordHasherInterface $hasher,
         private SerializerInterface $serializer,
-        private string $pathImagesPlanets,
-        private string $pathImagesCharacters,
-        private string $pathImagesTransformations,
+        //private string $pathImagesPlanets,
+        //private string $pathImagesCharacters,
+        //private string $pathImagesTransformations,
     ) {
     }
 
@@ -49,7 +49,7 @@ class AppFixtures extends Fixture
         $planetsArray = $this->serializer->deserialize($file_content, Planet::class . '[]', 'json');
         foreach ($planetsArray as $planet) {
             $localImage = explode('/', $planet->getImage());
-            $planet->setImage($this->pathImagesPlanets . end($localImage));
+            $planet->setImage(end($localImage));
             echo end($localImage) . PHP_EOL;
 
             $manager->persist($planet);
@@ -80,7 +80,7 @@ class AppFixtures extends Fixture
             $transformations = $this->serializer->deserialize(json_encode($character["transformations"]), TransformationModels::class . '[]', 'json');
             foreach ($transformations as $transformation) {
                 $localImage = explode('/', $transformation->getImage());
-                $transformation->setImage($this->pathImagesTransformations . end($localImage));
+                $transformation->setImage(end($localImage));
                 //$transformation->setImage($this->pathDownloadsImagesPlanets . $transformation->getImage());
             }
             $transformationsLocal = $this->serializer->serialize($transformations, 'json');// TransformationModels::class . '[]'
@@ -106,7 +106,7 @@ class AppFixtures extends Fixture
                 }
             }
             $localImage = explode('/', $imageCharacter);
-            $character->setImage('assets/characters/' . end($localImage));
+            $character->setImage(end($localImage));
 
 
             $character->setTransformation([$transformationsLocal]);
@@ -115,6 +115,9 @@ class AppFixtures extends Fixture
 
         }
         echo "chargement des characters ok" . PHP_EOL;
+
+
+
         // FIXTURES USER
         $filename = __DIR__ . '/user.json';
         $file_content = file_get_contents($filename);

@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -36,6 +37,9 @@ class UserCrudController extends AbstractCrudController
             EmailField::new('email'),
             //TextField::new('password'),
             TextField::new('avatar'),
+            ImageField::new('avatar', 'avatar')
+                ->setUploadDir('public/assets/characters')
+                ->setBasePath('public/assets/characters'),
             // Adding the character preference field as a dropdown.
             AssociationField::new('characterPref')
                 ->setLabel('Mon héros préféré')

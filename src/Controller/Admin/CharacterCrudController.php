@@ -5,13 +5,25 @@ namespace App\Controller\Admin;
 use App\Entity\Character;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class CharacterCrudController extends AbstractCrudController
 {
+    private string $uploadDir;
+    private string $basePath;
+
+    public function __construct(ParameterBagInterface $params)
+    {
+        $this->uploadDir = $params->get('upload_dir');
+        $this->basePath = $params->get('base_path');
+    }
     public static function getEntityFqcn(): string
     {
         return Character::class;
@@ -21,19 +33,25 @@ class CharacterCrudController extends AbstractCrudController
         return $crud
             ->setPageTitle(Crud::PAGE_INDEX, 'Liste des Héros');
     }
-    /*
-        public function configureFields(string $pageName): iterable
-        {
-            return [
-                IdField::new('id'),
-                TextField::new('title'),
-                TextEditorField::new('nomduChamp'),
+    public function configureFields(
+        string $pageName
 
-                ImageField::new('picturefilename')
-                    ->setUploadDir('public/uploads/recipe')
-                    ->setBasePath('uploads/recipe'),
-
-            ];
-        }
-    */
+    ): iterable {
+        return [
+            IdField::new('id')->hideOnForm(),
+            TextField::new('name', 'Name'),
+            TextField::new('ki', 'Ki'),
+            TextField::new('maxKi', 'Max Ki'),
+            TextField::new('race', 'Race'),
+            TextEditorField::new('description', 'Description'),
+            ImageField::new('image', 'Image')
+                ->setUploadDir('public/uploads/characters')
+                ->setBasePath('uploads/characters'),
+            TextField::new('affiliation', 'Affiliation'),
+            // DateTimeField::new('deletedAt', 'Deleted At')->hideOnForm(),
+            //TextField::new('gender', 'Gender')->setRequired(false),
+            // ArrayField::new('transformation', 'Transformation'),
+            // AssociationField::new('planet', 'Planet'),
+        ];
+    }
 }

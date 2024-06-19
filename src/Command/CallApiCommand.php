@@ -37,7 +37,7 @@ class CallApiCommand extends Command
         private EntityManagerInterface $entityManager,
         private PlanetRepository $planetRepository,
         private string $pathImagesCharacters,
-        private string $pathImagesPlanets,
+
         private string $pathImagesTransformations,
     ) {
 

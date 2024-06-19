@@ -4,9 +4,12 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+ 
+    upload_dir: 'public/uploads/characters/'
+    base_path: 'uploads/characters'
     app.admin_email: "admin@dbz.com"    
-    app.path_images_characters: assets/characters/"
-    app.path_images_planets: "assets/planets/"
+    app.path_images_characters: "/uploads/characters/"
+    path_images_planets: "/uploads/planets/"
     app.path_images_transformtions: "assets/transformations/"
     app.path_uploads: "/assets/images/uploads"
     app.path_avatars: "/assets/images/avatars"
@@ -15,10 +18,11 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        bind:           
+        bind:        
+              
             string $adminEmail: '%app.admin_email%'        
             string $pathImagesCharacters: '%app.path_images_characters%'
-            string $pathImagesPlanets: '%app.path_images_planets%'
+            
             string $pathImagesTransformations: '%app.path_images_transformtions%'
             string $pathImagesAvatars: '%app.path_avatars%'
             
