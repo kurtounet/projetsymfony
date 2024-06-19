@@ -23,7 +23,9 @@ class AppFixtures extends Fixture
     public function __construct(
         private UserPasswordHasherInterface $hasher,
         private SerializerInterface $serializer,
-        private string $pathDownloadsImagesPlanets,
+        private string $pathImagesPlanets,
+        private string $pathImagesCharacters,
+        private string $pathImagesTransformations,
     ) {
     }
 
@@ -43,7 +45,7 @@ class AppFixtures extends Fixture
         $planetsArray = $this->serializer->deserialize($file_content, Planet::class . '[]', 'json');
         foreach ($planetsArray as $planet) {
             $localImage = explode('/', $planet->getImage());
-            $planet->setImage('assets/planets/' . end($localImage));
+            $planet->setImage($this->pathImagesPlanets . end($localImage));
             echo end($localImage) . PHP_EOL;
 
             $manager->persist($planet);
@@ -74,11 +76,11 @@ class AppFixtures extends Fixture
             $transformations = $this->serializer->deserialize(json_encode($character["transformations"]), TransformationModels::class . '[]', 'json');
             foreach ($transformations as $transformation) {
                 $localImage = explode('/', $transformation->getImage());
-                $transformation->setImage('assets/transformations/' . end($localImage));
+                $transformation->setImage($this->pathImagesTransformations . end($localImage));
                 //$transformation->setImage($this->pathDownloadsImagesPlanets . $transformation->getImage());
             }
             $transformationsLocal = $this->serializer->serialize($transformations, 'json');// TransformationModels::class . '[]'
-
+            echo $transformationsLocal . PHP_EOL;
 
             // Récupère les url de l'image du charactère
             $imageCharacter = $character["image"];
@@ -101,7 +103,7 @@ class AppFixtures extends Fixture
             }
             $localImage = explode('/', $imageCharacter);
             $character->setImage('assets/characters/' . end($localImage));
-            $transformationsLocal = [];
+
             /*
                         foreach (json_decode($transformations, true) as $transformation) {
                             $transformation['image'] = $this->pathDownloadsImagesPlanets . $transformation['image'];
@@ -109,24 +111,23 @@ class AppFixtures extends Fixture
                             $nameTransformationImage = end($nameTransformationImage);
                         }
             */
-            $character->setTransformation($transformationsLocal);
+            $character->setTransformation([$transformationsLocal]);
             $manager->persist($character);
 
 
         }
-        /* FIXTURES USER
-                        echo "chargement des User" . PHP_EOL;
+        // FIXTURES USER
+        $filename = __DIR__ . '/user.json';
+        $file_content = file_get_contents($filename);
+        $UserArray = $this->serializer->deserialize($file_content, User::class . '[]', 'json');
 
-                        $filename = __DIR__ . '/user.json';
-                        $file_content = file_get_contents($filename);
-                        $UserArray = $this->serializer->deserialize($file_content, User::class . '[]', 'json');
-
-                        foreach ($UserArray as $user) {
-                            $user->setUserName($user->getFirstName() . $user->getLastName());
-                            $user->setPassword($user->getPassword());
-                            // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
-                            $manager->persist($user);
-                        }*/
+        foreach ($UserArray as $user) {
+            $user->setUserName($user->getFirstName() . $user->getLastName());
+            $user->setPassword($user->getPassword());
+            // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
+            $manager->persist($user);
+        }
+        echo "chargement des User" . PHP_EOL;
         $manager->flush();
 
     }

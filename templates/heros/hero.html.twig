@@ -5,7 +5,7 @@
 {% block body %}
  {% if hero != null %}
     <div class="flex bg-gray-400 m-10 rounded-lg p-5" >
-    <img class="object-scale-down rounded-lg " src="{{ hero.image }}" alt="{{ hero.name }}" 
+    <img class="object-scale-down rounded-lg " src="{{ asset( hero.image ) }}" alt="{{ hero.name }}" 
     style="width: 300px; height: 500px;">
     <div class="mt-1 p-5">
         <h1 class="text-red-500 text-4xl text-center font-semibold m-1" > {{ hero.name }} </h1>  
@@ -22,7 +22,7 @@
         <ul class="flex justify-center" >
             {% for tranformation in tranformations %}
                 <li class="text-center">
-                    <img class="object-scale-down rounded-lg " src="{{ tranformation.image }}" alt="{{tranformation.name }}" 
+                    <img class="object-scale-down rounded-lg " src="{{ asset( tranformation.image ) }}" alt="{{tranformation.name }}" 
                     style="width: 200px; height: 200px;">
                     <p class="text-lg font-semibold m-1 text-black"> {{ tranformation.name }}</p>
                 </li>

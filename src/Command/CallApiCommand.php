@@ -36,14 +36,11 @@ class CallApiCommand extends Command
         private DownloadImageService $downloadImageService,
         private EntityManagerInterface $entityManager,
         private PlanetRepository $planetRepository,
-        private string $pathDownloadsImagesCharacters,
-        private string $pathDownloadsImagesPlanets,
-        private string $pathDownloadsImagesTransformations,
+        private string $pathImagesCharacters,
+        private string $pathImagesPlanets,
+        private string $pathImagesTransformations,
     ) {
-        $this->serializer = $serializer;
-        $this->callApiService = $callApiService;
-        $this->entityManager = $entityManager;
-        $this->planetRepository = $planetRepository;
+
         parent::__construct();
     }
 
@@ -79,20 +76,22 @@ class CallApiCommand extends Command
             json_encode($planets['items'])
         );
 
-        /* CHARGER LES PLANETES DANS LA BASE DE DONNEES
-                foreach ($planets['items'] as $item) {
-                    $planet = new Planet();
-                    $planet->setName($item['name']);
-                    $planet->setIsDestroyed($item['isDestroyed']);
-                    $planet->setDescription($item['description']);
-                    $planet->setDeletedAt($item['deletedAt']);
-                    $planet->setImage($item['image']);
-                    $this->entityManager->persist($planet);
-                }
-                   
-                $this->entityManager->flush();
-                $io->success(' Toutes les planètes ont été importées!');
+        //CHARGER LES PLANETES DANS LA BASE DE DONNEES
+        /*
+        foreach ($planets['items'] as $item) {
+            $planet = new Planet();
+            $planet->setName($item['name']);
+            $planet->setIsDestroyed($item['isDestroyed']);
+            $planet->setDescription($item['description']);
+            $planet->setDeletedAt($item['deletedAt']);
+            $planet->setImage($item['image']);
+            $this->entityManager->persist($planet);
+        }
+
+        $this->entityManager->flush();
         */
+        $io->success(' Toutes les planètes ont été importées!');
+
 
         // CHARACTERS
         /**

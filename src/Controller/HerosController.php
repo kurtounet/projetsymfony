@@ -24,7 +24,7 @@ class HerosController extends AbstractController
     #[Route('/heros/{id}', name: 'app_hero')]
     public function hero(Character $character): Response
     {
-        $characterTransformations = $character->getTransformation();
+        $characterTransformations = json_decode($character->getTransformation()[0], true);
 
         return $this->render('heros/hero.html.twig', [
             'hero' => $character,

@@ -5,9 +5,9 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     app.admin_email: "admin@dbz.com"    
-    app.path_downloads_images_characters: "public/assets/downloads/characters/"
-    app.path_downloads_images_planets: "public/assets/downloads/planets/"
-    app.path_downloads_images_transformtions: "public/assets/downloads/transformations/"
+    app.path_images_characters: assets/characters/"
+    app.path_images_planets: "assets/planets/"
+    app.path_images_transformtions: "'assets/transformations/' "
     app.path_uploads: "/assets/images/uploads"
     app.path_avatars: "/assets/images/avatars"
 services:
@@ -17,9 +17,9 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:           
             string $adminEmail: '%app.admin_email%'        
-            string $pathDownloadsImagesCharacters: '%app.path_downloads_images_characters%'
-            string $pathDownloadsImagesPlanets: '%app.path_downloads_images_planets%'
-            string $pathDownloadsImagesTransformations: '%app.path_downloads_images_transformtions%'
+            string $pathImagesCharacters: '%app.path_images_characters%'
+            string $pathImagesPlanets: '%app.path_images_planets%'
+            string $pathImagesTransformations: '%app.path_images_transformtions%'
             string $pathImagesAvatars: '%app.path_avatars%'
             
     
