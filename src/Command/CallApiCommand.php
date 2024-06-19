@@ -79,7 +79,7 @@ class CallApiCommand extends Command
             json_encode($planets['items'])
         );
 
-        /*
+        /* CHARGER LES PLANETES DANS LA BASE DE DONNEES
                 foreach ($planets['items'] as $item) {
                     $planet = new Planet();
                     $planet->setName($item['name']);
@@ -93,12 +93,15 @@ class CallApiCommand extends Command
                 $this->entityManager->flush();
                 $io->success(' Toutes les planètes ont été importées!');
         */
+
         // CHARACTERS
-        /*
-        PROBLEME: les Id des characters ne suivent pas( il y a des plage vide).
-        RESOLUTION: Récupérer tout id existant, puis récupérer les personnage un par
-        un, car qui ils contiennet les données, des planètes et des transformations.
-        
+        /**
+         *  PROBLEME: les Id des characters ne suivent pas( il y a des plage vide).
+         *  RESOLUTION: Récupérer tout id existant, puis récupérer les personnage un par
+         *  un, car qui ils contiennet les données, des planètes et des transformations. 
+         */
+
+
         // 1er appel à l API pour récuperer itemsPerPage et totalPages.
         $characters = json_decode($this->callApiService->getData(self::ENDPOINT_CHARACTER), true);
         $totalItems = $characters["meta"]["itemsPerPage"] * $characters["meta"]["totalPages"];
@@ -135,25 +138,25 @@ class CallApiCommand extends Command
 
                 echo 'Image Transformation : ' . $url . PHP_EOL;
             }
-            
-                        $tabTransformationImage = explode('/', $character["transformations"]['image']);
-                        $character = json_decode($character, true);
-            
+
+            //$tabTransformationImage = explode('/', $character["transformations"]['image']);
+            $character = json_decode($character, true);
+
             $Allcharacters[] = $character;
             // echo ' - ' . json_decode($character, true)['name'] . ': OK' . PHP_EOL;
         }
-*/
-        /*
 
-                $io->success('Tous les personnages ont été importés ! ' . PHP_EOL);
-                echo 'Liste des id :' . PHP_EOL;
-                echo json_encode($ids, true);
-                file_put_contents(
-                    __DIR__ . self::DIR_FIXTURES . 'charactersApi.json',
-                    json_encode($Allcharacters)
-                );
-                $io->success('Fichier charactersApi.json a été crée dans le dossier: src/DataFixtures');
-        */
+
+
+        $io->success('Tous les personnages ont été importés ! ' . PHP_EOL);
+        echo 'Liste des id :' . PHP_EOL;
+        echo json_encode($ids, true);
+        file_put_contents(
+            __DIR__ . self::DIR_FIXTURES . 'charactersApi.json',
+            json_encode($Allcharacters)
+        );
+        $io->success('Fichier charactersApi.json a été crée dans le dossier: src/DataFixtures');
+
 
         /*
                 echo "CHARGEMENT DES DONNES EN BASE DE DONNÉES" . PHP_EOL;

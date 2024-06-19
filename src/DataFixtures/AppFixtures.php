@@ -5,13 +5,15 @@ namespace App\DataFixtures;
 use App\Entity\Character;
 use App\Entity\Planet;
 use App\Entity\User;
+use App\Models\TransformationModels;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+
 use Doctrine\Persistence\ObjectManager;
 
-use Symfony\Bundle\MakerBundle\ApplicationAwareMakerInterface;
+
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Serializer\SerializerInterface;
+
 
 
 class AppFixtures extends Fixture
@@ -47,11 +49,11 @@ class AppFixtures extends Fixture
             $manager->persist($planet);
         }
 
-        $manager->flush();
 
 
 
-        //CHARACTERS
+
+        //FIXTURES CHARACTERS
 
         echo "chargement des characters" . PHP_EOL;
         $filename = __DIR__ . '/CharactersAPI.json';
@@ -65,16 +67,27 @@ class AppFixtures extends Fixture
             $characters[] = $character;
             // Récupère le nom de la planète du charactère
             $planetName = $character["originPlanet"]["name"];
-            // Récupère les transformations du charactère
-            $transformations = $character["transformations"];
+
+            // Récupère les url des image de transformations du charactère pour 
+            //  et le adapte pour le chargement de l'image dans le dossier assets/transformations         
+
+            $transformations = $this->serializer->deserialize(json_encode($character["transformations"]), TransformationModels::class . '[]', 'json');
+            foreach ($transformations as $transformation) {
+                $localImage = explode('/', $transformation->getImage());
+                $transformation->setImage('assets/transformations/' . end($localImage));
+                //$transformation->setImage($this->pathDownloadsImagesPlanets . $transformation->getImage());
+            }
+            $transformationsLocal = $this->serializer->serialize($transformations, 'json');// TransformationModels::class . '[]'
+
+
             // Récupère les url de l'image du charactère
             $imageCharacter = $character["image"];
 
-
-
             // supprimer les proprietés originPlanet et transformations pour laisser seulement 
             //le character -> Entity Character
+
             unset($character["originPlanet"], $character["transformations"]);
+
             //convertir null en string "null"
             $character["deletedAt"] = "null";
             $character = json_encode($character);
@@ -86,20 +99,22 @@ class AppFixtures extends Fixture
                     break; // On peut arrêter la boucle dès qu'on trouve la personne
                 }
             }
-            $localImage = explode('/', $character["image"]);
+            $localImage = explode('/', $imageCharacter);
             $character->setImage('assets/characters/' . end($localImage));
             $transformationsLocal = [];
-            foreach (json_decode($transformations, true) as $transformation) {
-                $transformation['image'] = $this->pathDownloadsImagesPlanets . $transformation['image'];
-                $nameTransformationImage = explode('/', $transformation['image']);
-                $nameTransformationImage = end($nameTransformationImage);
-            }
-
+            /*
+                        foreach (json_decode($transformations, true) as $transformation) {
+                            $transformation['image'] = $this->pathDownloadsImagesPlanets . $transformation['image'];
+                            $nameTransformationImage = explode('/', $transformation['image']);
+                            $nameTransformationImage = end($nameTransformationImage);
+                        }
+            */
             $character->setTransformation($transformationsLocal);
             $manager->persist($character);
 
+
         }
-        /*
+        /* FIXTURES USER
                         echo "chargement des User" . PHP_EOL;
 
                         $filename = __DIR__ . '/user.json';
@@ -111,9 +126,9 @@ class AppFixtures extends Fixture
                             $user->setPassword($user->getPassword());
                             // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
                             $manager->persist($user);
-                        }
-                        $manager->flush();
-                */
+                        }*/
+        $manager->flush();
+
     }
 
 }
