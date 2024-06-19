@@ -1,0 +1,60 @@
+/*
+            $character = array_filter($planetsArray, function ($planet) use ($planetName) {
+                return $planet->name === $planetName;
+            });
+            echo $result[0]->getName();
+            //$this->getReference(UserFixtures::ADMIN_USER_REFERENCE)
+            echo $idplanet;
+            $objetPlanet = $this->getReference(AppFixtures::PLANET_REFERENCE . $idplanet, Planet::class);
+            echo $objetPlanet->getName();           
+            $this->getReference(UserFixtures::ADMIN_USER_REFERENCE)
+            $character["deletedAt"] = "null";
+            $characters = json_encode($character);
+            $characters = $this->serializer->deserialize($characters, Character::class, 'json');
+            $characters->setPlanet($this->getReference(PlanetFixtures::PLANET_CHARACTER_REFERENCE . $idplanet));             
+            $characters->setDeletedAt('null');
+            $characters->setTransformation($transformations);           
+            $planet = json_encode($character["originPlanet"]);
+            $planet = $this->serializer->deserialize($planet, Planet::class, 'json');
+            $namePlanet = $planet->getName();
+            $manager->persist($character);
+        }
+
+        // $manager->flush();
+
+       
+        echo "chargement des user";
+        $filename = __DIR__ . '/user.json';
+        $file_content = file_get_contents($filename);
+        $users = $this->serializer->deserialize($file_content, User::class . '[]', 'json');
+        //$users = json_decode($file_content, true);
+        //dd($users);
+        foreach ($users as $user) {
+
+            $manager->persist($user);
+        }
+        $manager->flush();
+         
+        echo "chargement des user";
+
+        $filename = __DIR__ . '/user.json';
+        $file_content = file_get_contents($filename);
+        $users = $this->serializer->deserialize($file_content, User::class . '[]', 'json');
+        //$users = json_decode($file_content, true);
+        //dd($users);
+        foreach ($users as $user) {
+
+            $manager->persist($user);
+        }
+        $manager->flush();
+
+         
+                echo "chargement des characters";
+                echo $this->loadData('LocalCharacters.json');
+
+                echo "chargement des characters";
+                echo $this->loadData('LocalCharacters.json');
+         
+         
+         
+                */

@@ -5,9 +5,9 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     app.admin_email: "admin@dbz.com"    
-    app.path_downloads_images_characters: "/assets/images/characters"
-    app.path_downloads_images_planets: "/assets/images/planets"
-    app.path_downloads_images_transformtions: "/assets/images/transformations"
+    app.path_downloads_images_characters: "public/assets/downloads/characters/"
+    app.path_downloads_images_planets: "public/assets/downloads/planets/"
+    app.path_downloads_images_transformtions: "public/assets/downloads/transformations/"
     app.path_uploads: "/assets/images/uploads"
     app.path_avatars: "/assets/images/avatars"
 services:

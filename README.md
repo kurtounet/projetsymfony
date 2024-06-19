@@ -1,11 +1,14 @@
 # Projet examen Symfony
 
-# FIXTURES:
-    charger la base de donnée a partir d'une api (https://web.dragonball-api.com/)
-    avec HTTPclient.
-commande pour :
+# FIXTURES: les donneés sont dans les json: src\DataFixtures
+
 - appel API : symfony console call-api
 - 
+
+    pour charger la base de donnée a partir d'une api (https://web.dragonball-api.com/)
+    avec HTTPclient.
+commande pour :
+
 
 #### A faire:
 ##### Filtre les heros par planets

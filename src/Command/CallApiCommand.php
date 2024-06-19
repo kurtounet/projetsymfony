@@ -28,17 +28,17 @@ class CallApiCommand extends Command
     private const ENDPOINT_CHARACTER = self::API_URL_BASE . 'characters';
     private const INFO_PLANET = self::API_URL_BASE . 'planets';
 
-    private $serializer;
-    private $callApiService;
-    private $entityManager;
-    private $planetRepository;
+
 
     public function __construct(
-        SerializerInterface $serializer,
-        CallApiService $callApiService,
-        DownloadImageService $downloadImageService,
-        EntityManagerInterface $entityManager,
-        PlanetRepository $planetRepository
+        private SerializerInterface $serializer,
+        private CallApiService $callApiService,
+        private DownloadImageService $downloadImageService,
+        private EntityManagerInterface $entityManager,
+        private PlanetRepository $planetRepository,
+        private string $pathDownloadsImagesCharacters,
+        private string $pathDownloadsImagesPlanets,
+        private string $pathDownloadsImagesTransformations,
     ) {
         $this->serializer = $serializer;
         $this->callApiService = $callApiService;
@@ -62,10 +62,22 @@ class CallApiCommand extends Command
         $planets = json_decode($this->callApiService->getData(self::INFO_PLANET), true);
         $totalItems = $planets["meta"]["itemsPerPage"] * $planets["meta"]["totalPages"];
         $planets = json_decode($this->callApiService->getData(self::INFO_PLANET . "?page=1&limit=$totalItems"), true);
+        // Téléchargement des image des planètes
+        foreach ($planets['items'] as $item) {
+            $tab = explode('/', $item['image']);
+            $nameImage = end($tab);
+            echo 'téléchargement de : ' . $item['image'] . "\n";
+            $this->downloadImageService->downloadImage(
+                $item['image'],
+                'public/assets/downloads/planets/' . $nameImage
+            );
+        }
+        // Sauvegarde des planètes dans le fichier json
         file_put_contents(
-            __DIR__ . self::DIR_FIXTURES . 'Planets.json',
-            json_encode($planets)
+            __DIR__ . self::DIR_FIXTURES . 'PlanetsAPI.json',
+            json_encode($planets['items'])
         );
+
         /*
         foreach ($planets['items'] as $item) {
             $planet = new Planet();
