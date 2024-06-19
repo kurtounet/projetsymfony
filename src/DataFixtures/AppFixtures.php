@@ -3,14 +3,18 @@
 namespace App\DataFixtures;
 
 use App\Entity\Character;
+use App\Entity\Contact;
 use App\Entity\Planet;
 use App\Entity\User;
+use App\Models\Message;
 use App\Models\TransformationModels;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
 use Doctrine\Persistence\ObjectManager;
 
 
+use Faker\Factory;
+use Symfony\Component\Messenger\Bridge\Doctrine\Transport\DoctrineTransport;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -57,7 +61,7 @@ class AppFixtures extends Fixture
 
         //FIXTURES CHARACTERS
 
-        echo "chargement des characters" . PHP_EOL;
+
         $filename = __DIR__ . '/CharactersAPI.json';
         $file_content = file_get_contents($filename);
         //$characters = $this->serializer->deserialize($file_content, Character::class . '[]', 'json');
@@ -80,7 +84,7 @@ class AppFixtures extends Fixture
                 //$transformation->setImage($this->pathDownloadsImagesPlanets . $transformation->getImage());
             }
             $transformationsLocal = $this->serializer->serialize($transformations, 'json');// TransformationModels::class . '[]'
-            echo $transformationsLocal . PHP_EOL;
+            //echo $transformationsLocal . PHP_EOL;
 
             // Récupère les url de l'image du charactère
             $imageCharacter = $character["image"];
@@ -104,18 +108,13 @@ class AppFixtures extends Fixture
             $localImage = explode('/', $imageCharacter);
             $character->setImage('assets/characters/' . end($localImage));
 
-            /*
-                        foreach (json_decode($transformations, true) as $transformation) {
-                            $transformation['image'] = $this->pathDownloadsImagesPlanets . $transformation['image'];
-                            $nameTransformationImage = explode('/', $transformation['image']);
-                            $nameTransformationImage = end($nameTransformationImage);
-                        }
-            */
+
             $character->setTransformation([$transformationsLocal]);
             $manager->persist($character);
 
 
         }
+        echo "chargement des characters ok" . PHP_EOL;
         // FIXTURES USER
         $filename = __DIR__ . '/user.json';
         $file_content = file_get_contents($filename);
@@ -127,9 +126,26 @@ class AppFixtures extends Fixture
             // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
             $manager->persist($user);
         }
-        echo "chargement des User" . PHP_EOL;
-        $manager->flush();
+        echo "chargement des User ok" . PHP_EOL;
 
+
+        $faker = Factory::create();
+
+        for ($i = 1; $i <= 10; $i++) {
+            $contact = new Contact();
+            $contact
+                ->setFirstName($faker->firstName)
+                ->setLastName($faker->lastName)
+                ->setEmail($faker->email)
+                ->setMessage($faker->paragraph)
+                ->setSubject($faker->sentence)
+                ->setCreatedAt($faker->dateTime);
+
+            $manager->persist($contact);
+        }
+        echo "chargement des Message ok" . PHP_EOL;
+        $manager->flush();
     }
+
 
 }

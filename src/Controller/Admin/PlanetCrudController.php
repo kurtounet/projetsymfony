@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Planet;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -24,14 +25,13 @@ class PlanetCrudController extends AbstractCrudController
             TextEditorField::new('description'),
         ];
     }
-        public function configurecrud(string $pageName): iterable
+        */
+
+
+    public function configureCrud(Crud $crud): Crud
     {
-        return [
-            setPageTitle('index', 'Liste des planetes'),
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        return $crud
+            ->setPageTitle(Crud::PAGE_INDEX, 'Liste des planètes');
     }
-    */
+
 }

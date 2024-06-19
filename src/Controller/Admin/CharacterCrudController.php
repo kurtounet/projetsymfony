@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Character;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -15,7 +16,11 @@ class CharacterCrudController extends AbstractCrudController
     {
         return Character::class;
     }
-
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle(Crud::PAGE_INDEX, 'Liste des Héros');
+    }
     /*
         public function configureFields(string $pageName): iterable
         {
