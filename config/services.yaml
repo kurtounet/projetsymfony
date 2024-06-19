@@ -7,7 +7,7 @@ parameters:
     app.admin_email: "admin@dbz.com"    
     app.path_images_characters: assets/characters/"
     app.path_images_planets: "assets/planets/"
-    app.path_images_transformtions: "'assets/transformations/' "
+    app.path_images_transformtions: "assets/transformations/"
     app.path_uploads: "/assets/images/uploads"
     app.path_avatars: "/assets/images/avatars"
 services:

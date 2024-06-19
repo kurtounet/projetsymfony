@@ -30,9 +30,6 @@ class HerosController extends AbstractController
             'hero' => $character,
             'tranformations' => $characterTransformations,
             'planet' => $character->getPlanet(),
-
-
-
         ]);
 
 
