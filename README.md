@@ -36,6 +36,7 @@ en cour download image
 #### Page formulaire inscription fait ##### Page inscription Newsletter (fait)
 #### Page formulaire inscription  (fait)
     - formulaire (fait)
+-upload de fichier pour l avart
     - validation (fait)         
     - email de notification (fait)
     - HashPassword avec Subcriber (fait)
