@@ -2,8 +2,8 @@
 
 ##
 
-# FIXTURES: 
-#### LA COMMANDE: symfony console call-api . 
+### FIXTURES: 
+##### LA COMMANDE: symfony console call-api . 
 ##### Appel l'API pour télécharger les données et les images de chaque personnage.Les données sont sauvegardés dans des fichier json: src\DataFixtures.
 
 - appel API : symfony console call-api
