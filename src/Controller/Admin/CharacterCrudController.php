@@ -38,8 +38,13 @@ class CharacterCrudController extends AbstractCrudController
 
     ): iterable {
         return [
-            IdField::new('id')->hideOnForm(),
-            TextField::new('name', 'Name'),
+            IdField::new('id')
+                ->hideOnForm()
+                ->hideOnIndex(),
+
+            TextField::new('name', 'Nom'),
+            TextField::new('gender', 'sexe'),
+
             TextField::new('ki', 'Ki'),
             TextField::new('maxKi', 'Max Ki'),
             TextField::new('race', 'Race'),
@@ -48,10 +53,8 @@ class CharacterCrudController extends AbstractCrudController
                 ->setUploadDir('public/uploads/characters')
                 ->setBasePath('uploads/characters'),
             TextField::new('affiliation', 'Affiliation'),
-            // DateTimeField::new('deletedAt', 'Deleted At')->hideOnForm(),
-            //TextField::new('gender', 'Gender')->setRequired(false),
-            // ArrayField::new('transformation', 'Transformation'),
-            // AssociationField::new('planet', 'Planet'),
+
+
         ];
     }
 }

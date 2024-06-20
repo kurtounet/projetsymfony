@@ -22,7 +22,7 @@
         <ul class="flex justify-center" >
             {% for tranformation in tranformations %}
                 <li class="text-center">
-                    <img class="object-scale-down rounded-lg " src="{{ asset( tranformation.image ) }}" alt="{{tranformation.name }}" 
+                    <img class="object-scale-down rounded-lg " src="{{ asset( '/uploads/transformations/' ~ tranformation.image ) }}" alt="{{tranformation.name }}" 
                     style="width: 200px; height: 200px;">
                     <p class="text-lg font-semibold m-1 text-black"> {{ tranformation.name }}</p>
                 </li>

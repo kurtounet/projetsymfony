@@ -5,7 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\Planet;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -16,16 +19,20 @@ class PlanetCrudController extends AbstractCrudController
         return Planet::class;
     }
 
-    /*
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('name', 'Name'),
+            TextEditorField::new('description', 'Description'),
+            ImageField::new('image', 'Image')
+                ->setUploadDir('public/uploads/planets')
+                ->setBasePath('uploads/planets'),
+            BooleanField::new('deletedAt', 'Deleted At')->hideOnForm(),
+            // DateTimeField::new('deletedAt', 'Deleted At')->hideOnForm(),
         ];
     }
-        */
+
 
 
     public function configureCrud(Crud $crud): Crud
