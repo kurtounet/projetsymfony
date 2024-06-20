@@ -40,9 +40,9 @@ en cour download image
     - email de notification (fait)
     
 ## Page inscription 
-->  authentification (fait)
-->  page login (fait)
-->  authentification (fait)
+#####  authentification (fait)
+#####  page login (fait)
+#####  authentification (fait)
 
 # Entity :
 
