@@ -1,8 +1,13 @@
 twig:
     file_name_pattern: '*.twig'
+    
     form_themes:
         - "@TalesFromADevFlowbite/form/default.html.twig"
-
+    
+    globals:
+        path_images_characters: '%app.path_images_characters%'
+        path_images_transformations: '%app.path_images_transformtions%'
+        path_images_planets: '%app.path_images_planets%' 
 
 when@test:
     twig:

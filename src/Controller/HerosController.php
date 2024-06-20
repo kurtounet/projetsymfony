@@ -35,7 +35,9 @@ class HerosController extends AbstractController
         return $this->render('heros/listheros.html.twig', [
 
             'heros' => $allCharacters,
-            'form' => $form
+            'form' => $form,
+
+
 
         ]);
     }

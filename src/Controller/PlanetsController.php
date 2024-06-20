@@ -13,11 +13,11 @@ class PlanetsController extends AbstractController
     #[Route('/planets', name: 'app_planets')]
     public function list(PlanetRepository $planetRepository): Response
     {
-        $path = $this->getParameter('path_images_planets');
+
         $planets = $planetRepository->findAll();
         return $this->render('planets/listPlanets.html.twig', [
             'planets' => $planets,
-            'path' => $path
+
         ]);
     }
     #[Route('/planets/{id}', name: 'app_planet')]

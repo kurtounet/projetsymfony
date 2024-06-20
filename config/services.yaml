@@ -4,27 +4,25 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
- 
+    # '/uploads/characters/'
+    app.admin_email: "admin@dbz.com"    
     upload_dir: 'public/uploads/characters/'
     base_path: 'uploads/characters'
-    app.admin_email: "admin@dbz.com"    
     app.path_images_characters: "/uploads/characters/"
-    path_images_planets: "/uploads/planets/"
-    app.path_images_transformtions: "assets/transformations/"
-    app.path_uploads: "/assets/images/uploads"
-    app.path_avatars: "/assets/images/avatars"
+    app.path_images_planets: "/uploads/planets/"
+    app.path_images_transformtions: "/uploads/transformations/"
+     
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        bind:        
-              
+        bind:      
             string $adminEmail: '%app.admin_email%'        
-            string $pathImagesCharacters: '%app.path_images_characters%'
-            
-            string $pathImagesTransformations: '%app.path_images_transformtions%'
-            string $pathImagesAvatars: '%app.path_avatars%'
+            # string $pathImagesCharacters: '%app.path_images_characters%'            
+            # string $pathImagesTransformations: '%app.path_images_transformtions%'           
+            # string $pathImagesPlanets: '%app.path_images_planets%'            
+            # string $pathImagesAvatars: '%app.path_avatars%'
             
     
     # makes classes in src/ available to be used as services

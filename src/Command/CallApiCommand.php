@@ -36,9 +36,9 @@ class CallApiCommand extends Command
         private DownloadImageService $downloadImageService,
         private EntityManagerInterface $entityManager,
         private PlanetRepository $planetRepository,
-        private string $pathImagesCharacters,
-
-        private string $pathImagesTransformations,
+        // private string $pathImagesCharacters,
+        // private string $pathImagesPlanets,
+        // private string $pathImagesTransformations,
     ) {
 
         parent::__construct();
