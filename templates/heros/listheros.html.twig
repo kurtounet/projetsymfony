@@ -7,14 +7,15 @@
 
  
 	{{ form_start(form) }}
-        <div class="flex justify-center align-center p-1 bg-slate-50 text-white">
+        <div class="flex justify-center items-end p-2 bg-slate-50">
+         
             {{ form_row(form.name) }}
             {{ form_row(form.race) }}
             {{ form_row(form.affiliation) }}
             {{ form_row(form.gender) }}
             {{ form_row(form.planet) }}
-
-            {{ form_row(form.submit, {'attr': {'class': 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'}}) }}
+            {{ form_row(form.submit, {'attr': {'class': 'bg-blue-500 hover:bg-blue-700 text-white font-bold m-4 py-2 px-4 rounded'}}) }}
+        
         </div>
     {{ form_end(form) }}
  
