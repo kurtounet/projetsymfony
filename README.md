@@ -1,105 +1,112 @@
 # Projet examen Symfony
 
-##
+## Fixtures
 
-#### FIXTURES: 
-##### LA COMMANDE: symfony console call-api . 
-##### Appel l'API pour télécharger les données et les images de chaque personnages. Les données sont sauvegardées dans des fichiers json: src\DataFixtures.
+### La Commande: `symfony console call-api`
 
-- appel API : symfony console call-api
-- 
+Appelle l'API pour télécharger les données et les images de chaque personnage. Les données sont sauvegardées dans des fichiers JSON: `src\DataFixtures`.
 
-    pour charger la base de donnée a partir d'une api (https://web.dragonball-api.com/)
-    avec HTTPclient.
-commande pour :
+Cette commande permet de charger la base de données à partir de l'API (<https://web.dragonball-api.com/>) en utilisant HTTPClient.
+
+La commande appel un service CallApiService , qui utilise HttpClient pour récuper les données, puis CallApiServcice appel DownloadImageService pour télécharger les images  avec le composant Filesystem.
 
 
-#### A faire:
- 
+## À faire
 
-#### redirection profile edit + supp champ password
-#### dir avatar + image
-#### download image dbz call-api
-##### Ajouter createdat et updateat aux entity
+- Redirection du profil après édition + suppression du champ mot de passe
  
  
-en cour download image
+ 
+ 
 
-# PUBLIC :
-#### Page acceuil. (fait)
-##### Page liste des héros. (fait)
-##### Filtre des heros (fait)  
-    - filtre des héros (fait)
-    -> Form +  
-#### Page liste planets (fait)
-#### Page détail planets fait
-#### Page formulaire inscription fait ##### Page inscription Newsletter (fait)
-#### Page formulaire inscription  (fait)
-    - formulaire (fait)
--upload de fichier pour l avart
-    - validation (fait)         
-    - email de notification (fait)
-    - HashPassword avec Subcriber (fait)
+# Public
 
-##### Page formulaire contact (fait)
-    - formulaire (fait)
-    - validation  (fait)
-    - email de notification (fait)
+- **Page d'accueil** (fait)
+- **Page liste des héros** (fait)   
+    - Formulaire de filtrage (fait)
+- **Page liste des planètes** (fait)
+- **Page détail des planètes** (fait)
+- **Page Page inscription Newsletter** (fait)   
+  - Formulaire d'inscription (fait)
+  - Email de notification (fait)
     
-## Page authentification 
-#####  authentification (fait)
-#####  Page login (fait)
+- **Page formulaire de contact** (fait)
+  - Formulaire (fait)
+  - Validation (fait)
+  - Email de notification (fait)
 
-# Entity :
+## Page authentification
 
-##### User
-##### Character
-##### Planet
-##### Contact
- 
+- **Authentification** (fait)
+- HashPassword avec Subscriber (fait)
+- Upload (sans bundle) de fichier pour l'avatar  
+- Email de notification (fait)
+- **Page login** (fait)
 
-#  Utilisateur
- 
--> Inscription nouveau utilisateur (ok)
--> Modifier profile utilisateur (ok), reste modife pwd()
+# Entités
 
-#  Admin easyadmin
--> CRUD user (a faire) 
--> CRUD heros (a faire)
--> CRUD Planète (a faire)
+- User
+- Character
+- Planet
+- Contact
 
+# Utilisateur
 
+- Inscription d'un nouvel utilisateur (ok)
+- Modification du profil utilisateur (ok), reste la modification du mot de passe
 
-Commande mise a jours api
+# Admin avec EasyAdmin
 
+- CRUD pour les utilisateurs (à faire)
+- CRUD pour les héros (à faire)
+- CRUD pour les planètes (à faire)
 
-# Création du projet
+## Commandes pour la mise à jour de l'API
+
+### Création du projet
+
 ```
 symfony new examsymfony --version=6.4 --webapp
 ```
-# Création de la base de donnée
+
+### Création de la base de données
+
 ```
 symfony console doctrine:database:create
 ```
-# Installation de Tailwind
+
+### Installation de Tailwind
+
 ```
 composer require symfonycasts/tailwind-bundle
 ```
-# Initialisaton de tailwind
+
+### Initialisation de Tailwind
+
 ```
 php bin/console tailwind:init
 ```
-# Lance la compilation et recompilera les CSS lors des changements dans le projet
+
+### Compilation et recompilation des CSS lors des changements dans le projet
+
 ```
 php bin/console tailwind:build --watch
 ```
-# Installation bundle pour les Fixtures
+
+### Installation du bundle pour les Fixtures
+
 ```
 composer require --dev orm-fixtures
 ```
-# Installation bundle pour http-client
+
+### Installation du bundle pour HTTPClient
+
 ```
 composer require symfony/http-client
 ```
-# IndexController 
+
+### Création d'un IndexController
+
+```
 symfony console make:Controller IndexController
+```
