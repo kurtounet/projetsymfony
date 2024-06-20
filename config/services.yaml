@@ -11,7 +11,7 @@ parameters:
     app.path_images_characters: "/uploads/characters/"
     app.path_images_planets: "/uploads/planets/"
     app.path_images_transformtions: "/uploads/transformations/"
-     
+    app.path_images_avatars : "/uploads/avatars/"
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -22,7 +22,7 @@ services:
             # string $pathImagesCharacters: '%app.path_images_characters%'            
             # string $pathImagesTransformations: '%app.path_images_transformtions%'           
             # string $pathImagesPlanets: '%app.path_images_planets%'            
-            # string $pathImagesAvatars: '%app.path_avatars%'
+            string $pathImagesAvatars: '%app.path_images_avatars%'
             
     
     # makes classes in src/ available to be used as services

@@ -13,18 +13,17 @@
      
         {% if user.avatar != 'avatar1.jpg' %}  
             <img
-            src="{{ '/assets/uploads/user/' ~ user.avatar }}"
+            src="{{ path_images_avatars ~ user.avatar }}"
             alt="{{ user.email }}"
             class="rounded-full max-h-[150px] max-w-[150px]"
             />
             {% else %}
             <img
-            src="{{ '/assets/avatar/' ~ user.avatar }}"
+            src="{{ path_images_avatars ~ user.avatar }}"
             alt="{{ user.email }}"
             class="rounded-full max-h-[150px] max-w-[150px]"
             />
-        {% endif %}
-     
+        {% endif %}    
          
         {{ form_row(registrationForm.avatar) }} 
         {{ form_row(registrationForm.userName) }}

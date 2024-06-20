@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
     public function __construct(
         private UserPasswordHasherInterface $hasher,
         private SerializerInterface $serializer,
-        //private string $pathImagesPlanets,
+        private string $pathImagesAvatars,
         //private string $pathImagesCharacters,
         //private string $pathImagesTransformations,
     ) {
@@ -126,6 +126,7 @@ class AppFixtures extends Fixture
         foreach ($UserArray as $user) {
             $user->setUserName($user->getFirstName() . $user->getLastName());
             $user->setPassword($user->getPassword());
+            $user->setAvatar('avatar1.jpg');
             // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
             $manager->persist($user);
         }

@@ -8,6 +8,7 @@ twig:
         path_images_characters: '%app.path_images_characters%'
         path_images_transformations: '%app.path_images_transformtions%'
         path_images_planets: '%app.path_images_planets%' 
+        path_images_avatars : '%app.path_images_avatars%' 
 
 when@test:
     twig:
