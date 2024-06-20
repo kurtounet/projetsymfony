@@ -39,22 +39,23 @@ en cour download image
     - validation  (fait)
     - email de notification (fait)
     
-## Page inscription 
+## Page authentification 
 #####  authentification (fait)
-#####  page login (fait)
-#####  authentification (fait)
+#####  Page login (fait)
 
 # Entity :
 
 ##### User
 ##### Character
 ##### Planet
+##### Contact
  
 
 #  Utilisateur
  
 -> Inscription nouveau utilisateur (ok)
 -> Modifier profile utilisateur (ok), reste modife pwd()
+
 #  Admin easyadmin
 -> CRUD user (a faire) 
 -> CRUD heros (a faire)
