@@ -15,8 +15,8 @@ commande pour :
 
 
 #### A faire:
-##### Filtre les heros par planets
-##### Filtre par sexe, séries  
+ 
+
 #### redirection profile edit + supp champ password
 #### dir avatar + image
 #### download image dbz call-api
@@ -26,13 +26,15 @@ commande pour :
 en cour download image
 
 # PUBLIC :
-##### Page acceuil. (fait)
+#### Page acceuil. (fait)
 ##### Page liste des héros. (fait)
-##### Page détail héros. (fait)
-##### Page liste planets (fait)
-##### Page détail planets fait
-##### Page formulaire inscription fait ##### Page inscription Newsletter (fait)
-##### Page formulaire inscription  (fait)
+##### Filtre des heros (fait)  
+    - filtre des héros (fait)
+    -> Form +  
+#### Page liste planets (fait)
+#### Page détail planets fait
+#### Page formulaire inscription fait ##### Page inscription Newsletter (fait)
+#### Page formulaire inscription  (fait)
     - formulaire (fait)
     - validation (fait)         
     - email de notification (fait)
