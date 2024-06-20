@@ -27,7 +27,7 @@ en cour download image
 ##### Page détail héros. (fait)
 ##### Page liste planets (fait)
 ##### Page détail planets fait
-##### Page formulaire inscription fait ##### Newsletter (fait)
+##### Page formulaire inscription fait ##### Page inscription Newsletter (fait)
 ##### Page formulaire inscription  (fait)
     - formulaire (fait)
     - validation (fait)         
