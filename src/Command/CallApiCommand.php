@@ -26,7 +26,7 @@ class CallApiCommand extends Command
     private const API_URL_BASE = 'https://dragonball-api.com/api/';
     private const DIR_FIXTURES = '/../DataFixtures/';
     private const ENDPOINT_CHARACTER = self::API_URL_BASE . 'characters';
-    private const INFO_PLANET = self::API_URL_BASE . 'planets';
+    private const ENDPOINT_PLANET = self::API_URL_BASE . 'planets';
 
 
 
@@ -56,9 +56,9 @@ class CallApiCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         // PLANETS
-        $planets = json_decode($this->callApiService->getData(self::INFO_PLANET), true);
+        $planets = json_decode($this->callApiService->getData(self::ENDPOINT_PLANET), true);
         $totalItems = $planets["meta"]["itemsPerPage"] * $planets["meta"]["totalPages"];
-        $planets = json_decode($this->callApiService->getData(self::INFO_PLANET . "?page=1&limit=$totalItems"), true);
+        $planets = json_decode($this->callApiService->getData(self::ENDPOINT_PLANET . "?page=1&limit=$totalItems"), true);
 
         // Téléchargement des images des planètes
         foreach ($planets['items'] as $item) {
@@ -67,7 +67,7 @@ class CallApiCommand extends Command
             echo 'téléchargement de : ' . $item['image'] . "\n";
             $this->downloadImageService->downloadImage(
                 $item['image'],
-                'public/assets/planets/' . $nameImage
+                'public/uploads/planets/' . $nameImage
             );
         }
         // Sauvegarde des planètes dans le fichier json
@@ -121,7 +121,7 @@ class CallApiCommand extends Command
 
             $this->downloadImageService->downloadImage(
                 $item['image'],
-                'public/assets/characters/' . $nameImage
+                'public/uploads/characters/' . $nameImage
             );
 
             $character = $this->callApiService->getData(self::ENDPOINT_CHARACTER . '/' . $item['id']);
@@ -132,7 +132,7 @@ class CallApiCommand extends Command
                 $nameTransformationImage = explode('/', $transformation['image']);
                 $this->downloadImageService->downloadImage(
                     $url,
-                    'public/assets/transformations/' . end($nameTransformationImage)
+                    'public/uploads/transformations/' . end($nameTransformationImage)
                 );
 
                 echo 'Image Transformation : ' . $url . PHP_EOL;
@@ -253,7 +253,7 @@ $this->entityManager->flush();*/
 
 /*
         // Fetch and deserialize all planets
-        $planetData = json_decode($this->callApiService->getData(self::INFO_PLANET . "?page=1&limit=1000"), true);
+        $planetData = json_decode($this->callApiService->getData(self::ENDPOINT_PLANET . "?page=1&limit=1000"), true);
         foreach ($planetData["items"] as $planetJson) {
             // Assuming each $planetJson is a JSON string of a single Planet object
             $planet = $this->serializer->deserialize(json_encode($planetJson), Planet::class, 'json');
