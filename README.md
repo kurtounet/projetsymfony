@@ -1,7 +1,7 @@
 # Projet examen Symfony
 
 # FIXTURES: 
-##### LA COMMANDE  : symfony console call-api . Appel l API pour télécharger les données et les images de chaque personnage.  puis sauvegarde les données dans des fichier json: src\DataFixtures.
+##### LA COMMANDE  : symfony console call-api . Appel l'API pour télécharger les données et les images de chaque personnage.Les données sont sauvegardé dans des fichier json: src\DataFixtures.
 
 - appel API : symfony console call-api
 - 
