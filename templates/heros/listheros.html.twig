@@ -4,6 +4,21 @@
 {% endblock %}
 
 {% block body %}
+
+ 
+	{{ form_start(form) }}
+        <div class="flex justify-center align-center p-1 bg-slate-50 text-white">
+            {{ form_row(form.name) }}
+            {{ form_row(form.race) }}
+            {{ form_row(form.affiliation) }}
+            {{ form_row(form.gender) }}
+            {{ form_row(form.planet) }}
+
+            {{ form_row(form.submit, {'attr': {'class': 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'}}) }}
+        </div>
+    {{ form_end(form) }}
+ 
+
 	<div class="flex justify-center flex-wrap m-5 gap-1">
 		{% for hero in heros %}
 			<div>
