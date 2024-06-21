@@ -5,9 +5,9 @@
              
             <img
             {% if user.avatar != 'avatar1.jpg' %} 
-            src="{{ '/assets/uploads/user/' ~ user.avatar }}"
+            src="{{ path_images_avatars ~ user.avatar }} "
             {% else %}
-            src="{{ '/assets/avatar/' ~ user.avatar }}"
+            src="{{ path_images_avatars ~ user.avatar }}"
             {% endif %}
             alt="{{ user.email }}"
             class="rounded-full max-h-[150px]"

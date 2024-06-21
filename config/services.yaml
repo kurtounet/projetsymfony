@@ -21,7 +21,7 @@ services:
             string $adminEmail: '%app.admin_email%'        
             # string $pathImagesCharacters: '%app.path_images_characters%'            
             # string $pathImagesTransformations: '%app.path_images_transformtions%'           
-            # string $pathImagesPlanets: '%app.path_images_planets%'            
+            string $pathImagesPlanets: '%app.path_images_planets%'            
             string $pathImagesAvatars: '%app.path_images_avatars%'
             
     

@@ -19,8 +19,10 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ProfileController extends AbstractController
 {
 
-    function __construct(private UserPasswordHasherInterface $hasher)
-    {
+    function __construct(
+        private UserPasswordHasherInterface $hasher,
+        private string $pathImagesAvatars
+    ) {
 
     }
     #[Route('/', name: 'app_profile_index', methods: ['GET'])]
@@ -44,7 +46,7 @@ class ProfileController extends AbstractController
 
         $user->setRoles(["ROLE_USER"]);
         $password = $form->get('password')->getData();
-        $user->setPassword($this->hasher->hashPassword($user, $password));
+        $user->setPassword($password);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +61,7 @@ class ProfileController extends AbstractController
                 $filename = $safeFilename . '-' . uniqid() . '.' . $avatar->guessExtension();
                 try {
                     $avatar->move(
-                        'assets/uploads/user/',
+                        $this->pathImagesAvatars,
                         $filename
                     );
                     $user->setavatar($filename);
@@ -113,10 +115,10 @@ class ProfileController extends AbstractController
                 $filename = $safeFilename . '-' . uniqid() . '.' . $avatar->guessExtension();
                 try {
                     $avatar->move(
-                        'assets/uploads/user/',
+                        $this->pathImagesAvatars,
                         $filename
                     );
-                    $user->setavatar($filename);
+                    $user->setAvatar($filename);
                 } catch (FileException $e) {
                     $form->addError(new FormError("Erreur lors de l'upload du fichier"));
                 }

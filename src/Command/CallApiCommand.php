@@ -37,7 +37,7 @@ class CallApiCommand extends Command
         private EntityManagerInterface $entityManager,
         private PlanetRepository $planetRepository,
         // private string $pathImagesCharacters,
-        // private string $pathImagesPlanets,
+        private string $pathImagesPlanets,
         // private string $pathImagesTransformations,
     ) {
 
@@ -67,8 +67,9 @@ class CallApiCommand extends Command
             echo 'téléchargement de : ' . $item['image'] . "\n";
             $this->downloadImageService->downloadImage(
                 $item['image'],
-                'public/uploads/planets/' . $nameImage
+                'public/' . $this->pathImagesPlanets . $nameImage
             );
+            //'public/uploads/planets/' 
         }
         // Sauvegarde des planètes dans le fichier json
         file_put_contents(

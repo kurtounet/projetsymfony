@@ -15,15 +15,11 @@ La commande appel un service CallApiService , qui utilise HttpClient pour récup
 
 - Redirection du profil après édition + suppression du champ mot de passe
  
- 
- 
- 
-
 # Public
 
 - **Page d'accueil** (fait)
 - **Page liste des héros** (fait)   
-    - Formulaire de filtrage (fait)
+  - Formulaire de filtrage avec createQueryBuilder (fait)
 - **Page liste des planètes** (fait)
 - **Page détail des planètes** (fait)
 - **Page Page inscription Newsletter** (fait)   
@@ -39,7 +35,7 @@ La commande appel un service CallApiService , qui utilise HttpClient pour récup
 
 - **Authentification** (fait)
 - HashPassword avec Subscriber (fait)
-- Upload (sans bundle) de fichier pour l'avatar  
+- Upload (sans bundle) de fichier pour l'avatar dans profileController  
 - Email de notification (fait)
 - **Page login** (fait)
 

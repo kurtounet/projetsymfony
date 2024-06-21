@@ -19,7 +19,7 @@ class CharacterRepository extends ServiceEntityRepository
     {
 
         $qb = $this->createQueryBuilder('c');
-        // si le tableau n'est pas vide $filters['name']
+        // si le tableau $filters['name'] n'est pas vide 
         if (!empty($filters['name'])) {
             $qb->andWhere('c.name LIKE :name')
                 ->setParameter('name', '%' . $filters['name'] . '%');
