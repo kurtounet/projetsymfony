@@ -45,7 +45,12 @@ La commande appel un service CallApiService , qui utilise HttpClient pour récup
 - Contact
 
 # Utilisateur
+- Profile 
 
+
+  Étape 1 : Créer le formulaire de changement de mot de passe
+  Étape 2 : Créer le contrôleur pour gérer le changement de mot de passe
+  Étape 3 : Créer la vue pour le formulaire
 - Inscription d'un nouvel utilisateur (ok)
 - Modification du profil utilisateur (ok), reste la modification du mot de passe
 

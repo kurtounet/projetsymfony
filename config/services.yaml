@@ -11,7 +11,7 @@ parameters:
     app.path_images_characters: "/uploads/characters/"
     app.path_images_planets: "/uploads/planets/"
     app.path_images_transformtions: "/uploads/transformations/"
-    app.path_images_avatars : "/uploads/avatars/"
+    app.path_images_avatars : "uploads/avatars/"
 services:
     # default configuration for services in *this* file
     _defaults:

@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class SubscribeUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -42,9 +42,10 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Mon Email',
             ])
-            ->add('password', TextType::class, [
-                'label' => 'Mon mots de passe',
-            ])
+
+            // ->add('password', TextType::class, [
+            //     'label' => 'Mon mots de passe',
+            // ])
             ->add('characterPref', EntityType::class, [
                 'label' => 'Mon héro préféré',
                 'class' => Character::class,

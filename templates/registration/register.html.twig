@@ -11,7 +11,7 @@
 
     {{ form_start(registrationForm) }}
      
-        {% if user.avatar != 'avatar1.jpg' %}  
+        {% if user.avatar != 'avatar1.webp' %}  
             <img
             src="{{ path_images_avatars ~ user.avatar }}"
             alt="{{ user.email }}"

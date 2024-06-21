@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\SubscribeUserType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -100,7 +101,7 @@ class ProfileController extends AbstractController
 
         $user = $this->getUser();
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(SubscribeUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -115,7 +116,8 @@ class ProfileController extends AbstractController
                 $filename = $safeFilename . '-' . uniqid() . '.' . $avatar->guessExtension();
                 try {
                     $avatar->move(
-                        $this->pathImagesAvatars,
+                        // $this->pathImagesAvatars,
+                        'uploads/avatars/',
                         $filename
                     );
                     $user->setAvatar($filename);
