@@ -33,10 +33,16 @@ La commande appel un service CallApiService , qui utilise HttpClient pour récup
 ## Page authentification
 
 - **Authentification** (fait)
-- HashPassword avec Subscriber (fait)
-- Upload de fichier (sans bundle) pour l'avatar dans profileController  
-- Email de notification (fait)
+  - HashPassword avec Subscriber (fait)
+  - Upload de fichier (sans bundle) pour l'avatar dans profileController  
+  - Email de notification (fait)
+  - Changer les mot de passe utilisateur avec subscriber updatePersit (fait)
 - **Page login** (fait)
+  - Formulaire (email) pour réinitialise du mots de passe + Email de notification (fait)
+  **Page réinitialise du mots de passe url: /reset-passowrd ->** (fait)
+  - 1.Formulaire (email) pour réinitialisation du mots de passe + Email de notification +
+  lien pour simuler lien vers le fomulaire du nouveau mode passe (fait)
+  - 2.Formulaire pour entrer le nouveau mots de passe.
 
 # Entités
 - User

@@ -20,11 +20,11 @@
         {{ form_row(form.firstName) }}
         {{ form_row(form.lastName) }}
         {{ form_row(form.email) }}
+
         <div class="bg-blue-500 hover:bg-blue-700 text-white font-bold m-4 py-2 px-4 rounded">
         <a href="{{ path('app_change_password') }}">Changer mon mots de passe</a>
-        </div> 
-    
-       {#  {{ form_row(form.password) }}  #}
+        </div>     
+        {{ form_row(form.password) }}  
         {{ form_row(form.characterPref,{
             'label':'Mon héro préféré'
         }) }}

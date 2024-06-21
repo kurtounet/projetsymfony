@@ -38,7 +38,10 @@ class ChangePasswordController extends AbstractController
 
             $this->addFlash('success', 'Votre nouveau mots de passe a bien été enregisté');
 
-            return $this->redirectToRoute('app_profile_edit');
+            return $this->redirectToRoute(
+                'app_profile_edit',
+                ['user' => $user]
+            );
         }
 
         return $this->render('change_password/changePassword.html.twig', [
@@ -46,4 +49,5 @@ class ChangePasswordController extends AbstractController
         ]);
 
     }
+
 }

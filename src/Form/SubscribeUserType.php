@@ -7,6 +7,7 @@ use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Form\Type\TextEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -43,9 +44,9 @@ class SubscribeUserType extends AbstractType
                 'label' => 'Mon Email',
             ])
 
-            // ->add('password', TextType::class, [
-            //     'label' => 'Mon mots de passe',
-            // ])
+            ->add('password', PasswordType::class, [
+                'label' => 'Mon mots de passe',
+            ])
             ->add('characterPref', EntityType::class, [
                 'label' => 'Mon héro préféré',
                 'class' => Character::class,
