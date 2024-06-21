@@ -28,19 +28,17 @@ La commande appel un service CallApiService , qui utilise HttpClient pour récup
     
 - **Page formulaire de contact** (fait)
   - Formulaire (fait)
-  - Validation (fait)
   - Email de notification (fait)
 
 ## Page authentification
 
 - **Authentification** (fait)
 - HashPassword avec Subscriber (fait)
-- Upload (sans bundle) de fichier pour l'avatar dans profileController  
+- Upload de fichier (sans bundle) pour l'avatar dans profileController  
 - Email de notification (fait)
 - **Page login** (fait)
 
 # Entités
-
 - User
 - Character
 - Planet

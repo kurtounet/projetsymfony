@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 body {
-    background-color: skyblue;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../images/local/dragon-ball-z.webp");
+    background-color: darkgrey;
+    background-image: url("../images/dbz.webp");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -13,7 +13,7 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-bg-form {
+/* Custom class for form background */
+.bg-form {
     background-color: darkgrey;
-
 }

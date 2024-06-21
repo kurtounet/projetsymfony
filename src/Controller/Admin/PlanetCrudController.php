@@ -28,8 +28,10 @@ class PlanetCrudController extends AbstractCrudController
             ImageField::new('image', 'Image')
                 ->setUploadDir('public/uploads/planets')
                 ->setBasePath('uploads/planets'),
-            BooleanField::new('deletedAt', 'Deleted At')->hideOnForm(),
-            // DateTimeField::new('deletedAt', 'Deleted At')->hideOnForm(),
+            BooleanField::new('deletedAt', 'Deleted At')
+                ->hideOnForm()
+                ->hideOnIndex(),
+
         ];
     }
 

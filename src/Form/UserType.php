@@ -43,7 +43,7 @@ class UserType extends AbstractType
                 'label' => 'Mon Email',
             ])
             ->add('password', TextType::class, [
-                'label' => 'Mon mot de passe',
+                'label' => 'Mon mots de passe',
             ])
             ->add('characterPref', EntityType::class, [
                 'label' => 'Mon héro préféré',
