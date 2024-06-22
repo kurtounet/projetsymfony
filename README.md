@@ -42,7 +42,7 @@ La commande appel un service CallApiService , qui utilise HttpClient pour récup
   **Page réinitialise du mots de passe url: /reset-passowrd ->** (fait)
   - 1.Formulaire (email) pour réinitialisation du mots de passe + Email de notification +
   lien pour simuler lien vers le fomulaire du nouveau mode passe (fait)
-  - 2.Formulaire pour entrer le nouveau mots de passe.
+  - 2.Formulaire pour entrer le nouveau mots de passe (ok).
 
 # Entités
 - User

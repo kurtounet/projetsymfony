@@ -50,25 +50,9 @@ class HashUserPasswordSubscriber implements EventSubscriberInterface
         if ($entity->getPassword()) {
             $hashedPassword = $this->hasher->hashPassword($entity, $entity->getPassword());
             $entity->setPassword($hashedPassword);
-            $entity->setPassword(null);
         }
-        // $entity->setPassword(
-        //     $this->hasher->hashPassword($entity, $entity->getPassword())
-        // );
+        $entity = null;
+
     }
-    // private function hashPassword($event): void
-    // {
-    //     $entity = $event->getObject();
 
-    //     if (!$entity instanceof User) {
-    //         return;
-    //     }
-
-    //     // Only hash the password if plainPassword is set
-    //     if ($entity->getPassword()) {
-    //         $hashedPassword = $this->hasher->hashPassword($entity, $entity->getPassword());
-    //         $entity->setPassword($hashedPassword);
-    //         $entity->setPassword(null);
-    //     }
-    // }
 }

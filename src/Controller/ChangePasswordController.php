@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Form\ChangePasswordFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,25 +13,21 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class ChangePasswordController extends AbstractController
 {
-    #[Route('/change/password', name: 'app_change_password')]
+    #[Route('/change/password/{id}', name: 'app_change_password')]
     public function changePassword(
         Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        UserRepository $userRepository,
 
     ): Response {
 
-        $user = $this->getUser();
-        /*
-                if (!$user instanceof UserInterface) {
-                    throw $this->createAccessDeniedException();
-                }
-        */
+        $user = $userRepository->find($request->get('id'));
         $form = $this->createForm(ChangePasswordFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $newPassword = $form->get('newPassword')->getData();
 
+            $newPassword = $form->get('password')->getData();
             $user->setPassword($newPassword);
 
             $entityManager->persist($user);
@@ -39,7 +36,7 @@ class ChangePasswordController extends AbstractController
             $this->addFlash('success', 'Votre nouveau mots de passe a bien été enregisté');
 
             return $this->redirectToRoute(
-                'app_profile_edit',
+                'app_login',
                 ['user' => $user]
             );
         }
