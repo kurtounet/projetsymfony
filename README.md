@@ -1,5 +1,8 @@
 # Projet examen Symfony
+Démarrer le projet:
+git clone 
 
+php bin/console tailwind:build
 ## Fixtures
 
 ### La Commande: `symfony console call-api`
