@@ -49,7 +49,7 @@ class RegistrationController extends AbstractController
                 $filename = $safeFilename . '-' . uniqid() . '.' . $avatar->guessExtension();
                 try {
                     $avatar->move(
-                        'assets/uploads/user/',
+                        'uploads/avatars/',
                         $filename
                     );
                     $user->setavatar($filename);

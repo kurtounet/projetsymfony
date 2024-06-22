@@ -17,11 +17,12 @@
 			<li>
 				<a href="{{ path('app_newsletter_subscribe') }}" class="hover:text-gray-300">Newsletter</a>
 			</li>
-			{% if ( not is_granted('ROLE_ADMIN') or  not is_granted('ROLE_USER') )%}
-			<li>
-				<a href="{{ path('app_register') }}" class="hover:text-gray-300">Inscription</a>
-			</li>
+			{% if not is_granted('IS_AUTHENTICATED_FULLY')  %}
+				<li>
+					<a href="{{ path('app_register') }}" class="hover:text-gray-300">Inscription</a>
+				</li>
 			{% endif %}
+
 		</ul>
 	</nav>
 	<div class="flex">

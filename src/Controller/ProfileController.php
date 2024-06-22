@@ -117,8 +117,7 @@ class ProfileController extends AbstractController
                 $filename = $safeFilename . '-' . uniqid() . '.' . $avatar->guessExtension();
                 try {
                     $avatar->move(
-                        $this->pathImagesAvatars,
-
+                        'uploads/avatars/',
                         $filename
                     );
                     $user->setAvatar($filename);

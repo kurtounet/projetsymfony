@@ -5,9 +5,9 @@
              
             <img
             {% if user.avatar != 'avatar1.webp' %} 
-            src="{{ 'public' ~ path_images_avatars ~ user.avatar }} "
+            src="{{  path_images_avatars ~ user.avatar }} "
             {% else %}
-            src="{{ 'public' ~ path_images_avatars ~ user.avatar }}"
+            src="{{  path_images_avatars ~ user.avatar }}"
             {% endif %}
             alt="{{ user.email }}"
             class="rounded-full max-h-[150px]"
