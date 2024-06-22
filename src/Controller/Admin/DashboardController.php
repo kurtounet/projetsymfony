@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Character;
 use App\Entity\Contact;
+use App\Entity\NewsletterEmail;
 use App\Entity\Planet;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -49,6 +50,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Mes Messsages', 'fas fa-list', Contact::class);
+        yield MenuItem::linkToCrud('Les Inscrit Newsletter', 'fas fa-list', NewsletterEmail::class);
         yield MenuItem::linkToCrud('Les Utilisateurs', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Les Heros', 'fas fa-list', Character::class);
         yield MenuItem::linkToCrud('Les Planets', 'fas fa-list', Planet::class);
