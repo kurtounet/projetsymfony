@@ -27,7 +27,7 @@ class RegistrationController extends AbstractController
         string $pathImagesAvatars
     ): Response {
         $user = new User();
-        $user->setAvatar('avatar1.jpg');
+        $user->setAvatar('avatar1.webp');
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -36,7 +36,7 @@ class RegistrationController extends AbstractController
             $user->setRoles(["ROLE_USER"]);
             // Hash le mot de passe
             //
-            $user->setPassword($form->get('plainPassword')->getData());
+            $user->setPassword($form->get('password')->getData());
 
             /** 
              * @var \Symfony\Component\HttpFoundation\File\UploadedFile $avatar 

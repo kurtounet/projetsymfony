@@ -4,16 +4,16 @@
          
              
             <img
-            {% if user.avatar != 'avatar1.jpg' %} 
-            src="{{ path_images_avatars ~ user.avatar }} "
+            {% if user.avatar != 'avatar1.webp' %} 
+            src="{{ 'public' ~ path_images_avatars ~ user.avatar }} "
             {% else %}
-            src="{{ path_images_avatars ~ user.avatar }}"
+            src="{{ 'public' ~ path_images_avatars ~ user.avatar }}"
             {% endif %}
             alt="{{ user.email }}"
             class="rounded-full max-h-[150px]"
             />            
             
-         
+        
         {{ form_start(form) }}
         {{ form_row(form.avatar) }} 
         {{ form_row(form.userName) }}
@@ -25,15 +25,12 @@
         <a href="{{ path('app_reset_password') }}">Changer mon mots de passe</a>
         </div>     
          
-        {{ form_row(form.password) }}    
+        {# {{ form_row(form.password) }}     #}
         {{ form_row(form.characterPref,{
             'label':'Mon héro préféré'
         }) }}
  
- {#
-    {{ form_row(form.avatar) }}
-    {{ form_widget(form) }}
-    #}
+
     
     <button class="btn bg-blue-500 p-5 rounded-lg justify-content-between">{{ button_label|default('Save') }}</button>
      

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\EditProfileUserType;
 use App\Form\SubscribeUserType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -42,7 +43,7 @@ class ProfileController extends AbstractController
         SluggerInterface $slugger
     ): Response {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(SubscribeUserType::class, $user);
         $form->handleRequest($request);
 
         $user->setRoles(["ROLE_USER"]);
@@ -101,7 +102,7 @@ class ProfileController extends AbstractController
 
         $user = $this->getUser();
 
-        $form = $this->createForm(SubscribeUserType::class, $user);
+        $form = $this->createForm(EditProfileUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -116,8 +117,8 @@ class ProfileController extends AbstractController
                 $filename = $safeFilename . '-' . uniqid() . '.' . $avatar->guessExtension();
                 try {
                     $avatar->move(
-                        // $this->pathImagesAvatars,
-                        'uploads/avatars/',
+                        $this->pathImagesAvatars,
+
                         $filename
                     );
                     $user->setAvatar($filename);
