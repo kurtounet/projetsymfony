@@ -70,7 +70,7 @@ class AppFixtures extends Fixture
         $characters = [];
         // dd($characters);
         foreach ($file_content as $character) {
-            $characters[] = $character;
+
             // Récupère le nom de la planète du charactère
             $planetName = $character["originPlanet"]["name"];
 
@@ -98,6 +98,7 @@ class AppFixtures extends Fixture
             $character["deletedAt"] = "null";
             $character = json_encode($character);
             $character = $this->serializer->deserialize($character, Character::class, 'json');
+
             // Attacher le charactère à la planète
             foreach ($planetsArray as $planet) {
                 if ($planet->getName() === $planetName) {
@@ -110,6 +111,7 @@ class AppFixtures extends Fixture
 
 
             $character->setTransformation([$transformationsLocal]);
+            $characters[] = $character;
             $manager->persist($character);
 
 
@@ -125,8 +127,12 @@ class AppFixtures extends Fixture
 
         foreach ($UserArray as $user) {
             $user->setUserName($user->getFirstName() . $user->getLastName());
+
             $user->setPassword($user->getPassword());
             $user->setAvatar('avatar1.webp');
+
+
+            $user->setCharacterPref($characters[rand(0, 3)]);
             // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
             $manager->persist($user);
         }

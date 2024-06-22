@@ -16,8 +16,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
-class RegistrationFormType extends AbstractType
+class RegistrationFormType1 extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -31,21 +33,16 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
             ->add('userName', TextType::class, [
-                'label' => 'Mon Pseudo*',
-                "required" => true,
-
+                'label' => 'Mon Pseudo',
             ])
             ->add('firstName', TextType::class, [
-                'label' => 'Mon Nom*',
-                "required" => true,
+                'label' => 'Mon Nom',
             ])
             ->add('lastName', TextType::class, [
-                'label' => 'Mon Prénom*',
-                "required" => true,
+                'label' => 'Mon Prénom',
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Mon Email*',
-                "required" => true,
+                'label' => 'Mon Email',
             ])
             ->add('password', RepeatedType::class, [
                 "type" => PasswordType::class,
@@ -56,36 +53,6 @@ class RegistrationFormType extends AbstractType
                 "second_options" => ["label" => "Confirmer le mot de passe", "label_attr" => ["class" => "text-2xl"]],
                 "label_attr" => ["class" => "text-2xl"]
             ])
-            ->add('numAdress', TextType::class, [
-                'label' => 'Numéro de rue',
-                'required' => false,
-            ])
-            ->add('adress', TextType::class, [
-                'label' => 'Rue/Avenue',
-                'required' => false,
-            ])
-            ->add('city', TextType::class, [
-                'label' => 'Ville',
-                'required' => false,
-            ])
-            ->add('zipcode', TextType::class, [
-                'label' => 'Code postale',
-                'required' => false,
-            ])
-            ->add('country', TextType::class, [
-                'label' => 'Pays',
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'France',
-                ],
-            ])
-            // ->add('latitude', TextType::class, [
-            //     'label' => 'latitude',
-            //     ''
-            // ])
-            // ->add('longitude', TextType::class, [
-            //     'label' => 'longitude',
-            // ])
             // ->add('plainPassword', RepeatedType::class, [
             //     "type" => PasswordType::class,
             //     'mapped' => false,
@@ -102,7 +69,11 @@ class RegistrationFormType extends AbstractType
             //         ]),
             //     ],
             // ])
-
+            ->add('num', EntityType::class, [
+                'label' => 'Mon héro préféré',
+                'class' => Character::class,
+                'choice_label' => 'name',
+            ])
             ->add('characterPref', EntityType::class, [
                 'label' => 'Mon héro préféré',
                 'class' => Character::class,
@@ -110,18 +81,16 @@ class RegistrationFormType extends AbstractType
             ])
 
 
-
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'Veuillez accepter les conditions d\'utilisation.',
+                        'message' => 'You should agree to our terms.',
                     ]),
                 ],
             ])
 
         ;
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void

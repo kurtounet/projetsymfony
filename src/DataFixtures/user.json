@@ -4,7 +4,14 @@
     "lastName": "Doe",
     "email": "john.doe@gmail.com",
     "password": "pwd1",
-    "roles": ["ROLE_ADMIN"],
+    "roles": [
+      "ROLE_ADMIN"
+    ],
+    "numAdress": 10,
+    "adress": "rue de la paix",
+    "city": "Paris",
+    "zipcode": "75000",
+    "country": "France",
     "avatar": "assets/avatar1.jpg",
     "CharacterPref": null
   },
@@ -13,7 +20,14 @@
     "lastName": "Smith",
     "email": "jane.smith@gmail.com",
     "password": "pwd2",
-    "roles": ["ROLE_USER"],
+    "roles": [
+      "ROLE_USER"
+    ],
+    "numAdress": 5,
+    "adress": "Avenue des Champs-Élysées",
+    "city": "Paris",
+    "zipcode": "75008",
+    "country": "France",
     "avatar": "assets/avatar2.jpg",
     "CharacterPref": null
   },
@@ -22,7 +36,14 @@
     "lastName": "Johnson",
     "email": "alice.johnson@gmail.com",
     "password": "pwd3",
-    "roles": ["ROLE_ADMIN"],
+    "roles": [
+      "ROLE_ADMIN"
+    ],
+    "numAdress": 12,
+    "adress": "Boulevard Haussmann",
+    "city": "Paris",
+    "zipcode": "75009",
+    "country": "France",
     "avatar": "assets/avatar3.jpg",
     "CharacterPref": null
   },
@@ -31,7 +52,14 @@
     "lastName": "Brown",
     "email": "bob.brown@gmail.com",
     "password": "pwd4",
-    "roles": ["ROLE_ADMIN"],
+    "roles": [
+      "ROLE_ADMIN"
+    ],
+    "numAdress": 3,
+    "adress": "Rue de Rivoli",
+    "city": "Paris",
+    "zipcode": "75001",
+    "country": "France",
     "avatar": "assets/avatar4.jpg",
     "CharacterPref": null
   },
@@ -40,7 +68,14 @@
     "lastName": "Davis",
     "email": "carol.davis@gmail.com",
     "password": "pwd5",
-    "roles": ["ROLE_USER"],
+    "roles": [
+      "ROLE_USER"
+    ],
+    "numAdress": 20,
+    "adress": "Rue Saint-Honoré",
+    "city": "Paris",
+    "zipcode": "75001",
+    "country": "France",
     "avatar": "assets/avatar5.jpg",
     "CharacterPref": null
   },
@@ -49,7 +84,14 @@
     "lastName": "Miller",
     "email": "david.miller@gmail.com",
     "password": "pwd6",
-    "roles": ["ROLE_ADMIN"],
+    "roles": [
+      "ROLE_ADMIN"
+    ],
+    "numAdress": 7,
+    "adress": "Rue de la Paix",
+    "city": "Paris",
+    "zipcode": "75002",
+    "country": "France",
     "avatar": "assets/avatar6.jpg",
     "CharacterPref": null
   },
@@ -58,7 +100,14 @@
     "lastName": "Garcia",
     "email": "eva.garcia@gmail.com",
     "password": "pwd7",
-    "roles": ["ROLE_USER"],
+    "roles": [
+      "ROLE_USER"
+    ],
+    "numAdress": 15,
+    "adress": "Avenue Montaigne",
+    "city": "Paris",
+    "zipcode": "75008",
+    "country": "France",
     "avatar": "assets/avatar7.jpg",
     "CharacterPref": null
   },
@@ -67,7 +116,14 @@
     "lastName": "Wilson",
     "email": "frank.wilson@gmail.com",
     "password": "pwd8",
-    "roles": ["ROLE_ADMIN"],
+    "roles": [
+      "ROLE_ADMIN"
+    ],
+    "numAdress": 2,
+    "adress": "Rue de la Fayette",
+    "city": "Paris",
+    "zipcode": "75009",
+    "country": "France",
     "avatar": "assets/avatar8.jpg",
     "CharacterPref": null
   },
@@ -76,7 +132,14 @@
     "lastName": "Martinez",
     "email": "grace.martinez@gmail.com",
     "password": "pwd9",
-    "roles": ["ROLE_USER"],
+    "roles": [
+      "ROLE_USER"
+    ],
+    "numAdress": 8,
+    "adress": "Boulevard Saint-Germain",
+    "city": "Paris",
+    "zipcode": "75006",
+    "country": "France",
     "avatar": "assets/avatar9.jpg",
     "CharacterPref": null
   },
@@ -85,7 +148,14 @@
     "lastName": "Lopez",
     "email": "henry.lopez@gmail.com",
     "password": "pwd10",
-    "roles": ["ROLE_ADMIN"],
+    "roles": [
+      "ROLE_ADMIN"
+    ],
+    "numAdress": 14,
+    "adress": "Avenue de l'Opéra",
+    "city": "Paris",
+    "zipcode": "75002",
+    "country": "France",
     "avatar": "assets/avatar10.jpg",
     "CharacterPref": null
   }
