@@ -109,10 +109,18 @@ class ProfileController extends AbstractController
         $form = $this->createForm(EditProfileUserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            if (
+                $address->getNum() != null &&
+                $address->getStreet() != null &&
+                $address->getZipcode() != null &&
+                $address->getCity() != null &&
+                $address->getCountry() != null
 
-            $addressCoordinates = $this->geoService->geocode($address);
-            $user->setAddress($addressCoordinates);
+            ) {
 
+                $addressCoordinates = $this->geoService->geocode($address);
+                $user->setAddress($addressCoordinates);
+            }
             /** 
              * @var \Symfony\Component\HttpFoundation\File\UploadedFile $avatar 
              * */

@@ -15,20 +15,22 @@ use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 class GeolocationSubscriber implements EventSubscriberInterface
 {
 
-    public function __construct(private GeoService $geoService)
-    {
+    public function __construct(
+        private GeoService $geoService
+    ) {
     }
 
     public function addressRegistered(
         AddressRegisteredEvent $event
     ): void {
-        $entity = $event->getAddress();
+        $entity = $event->getObject();
+        
 
         if (!$entity instanceof Address) {
             return;
         }
 
-        $coordinates = $this->$geoService->getCoordinate($entity);
+        $coordinates = $this->geoService->geocode($entity);
         $entity->setLatitude($coordinates['lat']);
         $entity->setLongitude($coordinates['lon']);
 
