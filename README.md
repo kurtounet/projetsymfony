@@ -30,7 +30,10 @@ Les images dans :
 ### Pour la Géolocalisation
 
 > Géolocalisation : <https://nominatim.openstreetmap.org/>
+ ## Cela fonctionne. 
+ ### Les coordonnés sont enregistrées dans la table Address, lors de l'inscription de l'utilisateur , et modifier si il modifie sont adresse dans sont profile.
 
+  
 ## Fixtures
 
 ### Pour charger les données en BDD
@@ -66,8 +69,7 @@ symfony console d:f:l
   - Email de notification (fait)
   -enrigistrement du message en bbd dans la table contact
 
-- **Page authentification**
-   
+- **Page authentification**   
     - HashPassword avec Subscriber (fait)
     - Upload de fichier (sans bundle) pour l'avatar dans ProfileController
     - Email de notification (fait)
@@ -75,7 +77,7 @@ symfony console d:f:l
 - **Page login et lien vers la réinitialisation du mot de passe** (fait)
   - Formulaire pour accèder a l'espace utilisateur
 
-- **Page réinitialisation du mot de passe** url: /reset-password -> (fait)
+- **Page réinitialisation du mot de passe** url: /reset-password  (fait)
   - Formulaire (email) pour réinitialisation du mot de passe (fait)
   - Email de notification (fait)
   - Lien pour simuler le lien dans emai, qui redirige vers le formulaire du nouveau mot de passe (fait)
@@ -91,13 +93,9 @@ symfony console d:f:l
 - **Address**
 - **Newsletter**
 
-# Utilisateur
-- Profil
-  Étape 1 : Créer le formulaire de changement de mot de passe
-  Étape 2 : Créer le contrôleur pour gérer le changement de mot de passe
-  Étape 3 : Créer la vue pour le formulaire
-- Inscription d'un nouvel utilisateur (ok)
-- Modification du profil utilisateur (ok), reste la modification du mot de passe
+# Espace Utilisateur
+- Modification du profil utilisateur (ok) 
+- Modification du mot de passe (ok)
 
 # Admin avec EasyAdmin
 

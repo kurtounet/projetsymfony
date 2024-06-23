@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Service\GeoService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -17,6 +18,14 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class RegistrationController extends AbstractController
 {
+    function __construct(
+        private UserPasswordHasherInterface $hasher,
+        private GeoService $geoService,
+        private string $pathImagesAvatars
+    ) {
+
+    }
+
     #[Route('/register', name: 'app_register')]
     public function register(
         Request $request,
@@ -26,18 +35,16 @@ class RegistrationController extends AbstractController
         SluggerInterface $slugger,
         string $pathImagesAvatars
     ): Response {
+
         $user = new User();
         $user->setAvatar('avatar1.webp');
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             // Donne les role par defaut 
             $user->setRoles(["ROLE_USER"]);
-            // Hash le mot de passe
-            //
-            $user->setPassword($form->get('password')->getData());
 
+            $user->setPassword($form->get('password')->getData());
             /** 
              * @var \Symfony\Component\HttpFoundation\File\UploadedFile $avatar 
              * */
@@ -57,7 +64,19 @@ class RegistrationController extends AbstractController
                     $form->addError(new FormError("Erreur lors de l'upload du fichier"));
                 }
             }
+            $address = $form->get('address')->getData();
+            if (
+                $address->getNum() != null &&
+                $address->getStreet() != null &&
+                $address->getZipcode() != null &&
+                $address->getCity() != null &&
+                $address->getCountry() != null
 
+            ) {
+
+                $addressCoordinates = $this->geoService->geocode($address);
+                $user->setAddress($addressCoordinates);
+            }
             $entityManager->persist($user);
             $entityManager->flush();
 
