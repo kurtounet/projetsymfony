@@ -7,6 +7,7 @@ use App\Form\EditProfileUserType;
 use App\Form\SubscribeUserType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\GeoService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -23,6 +24,7 @@ class ProfileController extends AbstractController
 
     function __construct(
         private UserPasswordHasherInterface $hasher,
+        private GeoService $geoService,
         private string $pathImagesAvatars
     ) {
 
@@ -97,15 +99,20 @@ class ProfileController extends AbstractController
     public function edit(
         Request $request,
         EntityManagerInterface $entityManager,
-        SluggerInterface $slugger
+        SluggerInterface $slugger,
+
     ): Response {
 
         $user = $this->getUser();
+        $address = $user->getAddress();
 
         $form = $this->createForm(EditProfileUserType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $addressCoordinates = $this->geoService->geocode($address);
+            $user->setAddress($addressCoordinates);
+
             /** 
              * @var \Symfony\Component\HttpFoundation\File\UploadedFile $avatar 
              * */

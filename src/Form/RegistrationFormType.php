@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -56,6 +57,7 @@ class RegistrationFormType extends AbstractType
                 "second_options" => ["label" => "Confirmer le mot de passe", "label_attr" => ["class" => "text-2xl"]],
                 "label_attr" => ["class" => "text-2xl"]
             ])
+            /*
             ->add('numAdress', TextType::class, [
                 'label' => 'Numéro de rue',
                 'required' => false,
@@ -102,15 +104,14 @@ class RegistrationFormType extends AbstractType
             //         ]),
             //     ],
             // ])
+*/
+            ->add('address', AddressType::class)
 
             ->add('characterPref', EntityType::class, [
                 'label' => 'Mon héro préféré',
                 'class' => Character::class,
                 'choice_label' => 'name',
             ])
-
-
-
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -119,6 +120,15 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+
+            ->add(
+                'submit',
+                SubmitType::class,
+                [
+                    'label' => 'je m\'inscrire',
+                    'attr' => ['class' => 'btn btn-primary bg-blue-500 p-2 w-full justify-center']
+                ]
+            ) //, 'label' => 'Je m\'inscrire'])
 
         ;
 

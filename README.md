@@ -1,7 +1,34 @@
 # Projet examen Symfony
-Démarrer le projet:
-git clone 
+ 
+## Appel à 2 api
 
+##### Pour récupérer les données 
+>Api dragon ball-z :https://web.dragonball-api.com/
+
+Tapez la commande:
+```bash
+ symfony console call-api  
+```
+La commande appelle l'API pour télécharger les données et les images de chaque personnage. 
+
+Les données sont sauvegardées dans des fichiers JSON: 
+- Pour les personnage dans :`src/DataFixtures/charactersApi.json`
+- Pour les planètes dans :`src/DataFixtures/planetsApi.json`
+ 
+Les image dans :
+- Pour les personnage dans :`public/upload/characters`
+- Pour les planètes dans :`public/upload/planets`
+- Pour les transformations dans :`public/upload/transformations`
+
+Cette commande permet de charger la base de données à partir de l'API (<https://web.dragonball-api.com/>) en utilisant HTTPClient.
+
+La commande appel un service CallApiService , qui utilise HttpClient pour récuper les données, puis CallApiServcice appel DownloadImageService pour télécharger les images avec le composant Filesystem.
+
+##### Pour La Geolocalisation
+>
+>Geolocalisation : <https://nominatim.openstreetmap.org/>
+
+###
 php bin/console tailwind:build
 ## Fixtures
 

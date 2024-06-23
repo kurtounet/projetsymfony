@@ -8,6 +8,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Form\Type\TextEditorType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -43,7 +44,6 @@ class EditProfileUserType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => 'Mon Email',
             ])
-
             // ->add('password', PasswordType::class, [
             //     'label' => 'Mon mots de passe',
             // ])
@@ -52,7 +52,18 @@ class EditProfileUserType extends AbstractType
                 'class' => Character::class,
                 'choice_label' => 'name',
             ])
+            ->add('address', AddressType::class)
+          
+            ->add(
+                'submit',
+                SubmitType::class,
+                [
+                    'label' => 'Mettre a jour',
+                    'attr' => ['class' => 'btn btn-primary bg-blue-500 p-2 w-full justify-center']
+                ]
+            ) //, 'label' => 'Je m\'inscrire'])
         ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

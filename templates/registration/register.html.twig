@@ -36,10 +36,17 @@
         {{ form_row(registrationForm.characterPref,{
             'label':'Mon héro préféré'
         }) }}
-        
+        {# 
+        {{ form_row(registrationForm.numAdress) }}
+        {{ form_row(registrationForm.adress) }}
+        {{ form_row(registrationForm.zipcode) }}
+        {{ form_row(registrationForm.city) }}
+        {{ form_row(registrationForm.country) }}          
+        #}
         {{ form_row(registrationForm.agreeTerms) }}
+        {{ form_row(registrationForm.submit) }}
 
-        <button type="submit" class="btn">Je m'inscris</button>
+        
     {{ form_end(registrationForm) }}
     </div>
 </div> 

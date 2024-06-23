@@ -51,26 +51,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne]
     private ?Character $characterPref = null;
 
-    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
-    private ?int $numAdress = null;
 
-    #[ORM\Column(length: 6, nullable: true)]
-    private ?string $zipcode = null;
+    
+    #[ORM\ManyToOne(inversedBy: 'User', cascade: ['persist'])]
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $adress = null;
-
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $city = null;
-
-    #[ORM\Column(length: 10, nullable: true)]
-    private ?string $country = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $latitude = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $longitude = null;
+    private ?Address $address = null;
 
 
 
@@ -209,88 +194,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getNumAdress(): ?int
+    public function getAddress(): ?Address
     {
-        return $this->numAdress;
+        return $this->address;
     }
 
-    public function setNumAdress(int $numAdress): static
+    public function setAddress(?Address $address): static
     {
-        $this->numAdress = $numAdress;
-
-        return $this;
-    }
-
-    public function getAdress(): ?string
-    {
-        return $this->adress;
-    }
-
-    public function setAdress(string $adress): static
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): static
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getCountry(): ?string
-    {
-        return $this->country;
-    }
-
-    public function setCountry(string $country): static
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-
-    public function getZipcode()
-    {
-        return $this->zipcode;
-    }
-
-
-    public function setZipcode($zipcode)
-    {
-        $this->zipcode = $zipcode;
-
-        return $this;
-    }
-
-    public function getLatitude(): ?string
-    {
-        return $this->latitude;
-    }
-
-    public function setLatitude(?string $latitude): static
-    {
-        $this->latitude = $latitude;
-
-        return $this;
-    }
-
-    public function getLongitude(): ?string
-    {
-        return $this->longitude;
-    }
-
-    public function setLongitude(?string $longitude): static
-    {
-        $this->longitude = $longitude;
+        $this->address = $address;
 
         return $this;
     }

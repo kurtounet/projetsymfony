@@ -29,10 +29,16 @@
         {{ form_row(form.characterPref,{
             'label':'Mon héro préféré'
         }) }}
+        {{ form_row(form.address) }}        
+        {{ form_row(form.submit,{
+            'label':'Mettre à jour'
+        }) }}
+
+
  
 
     
-    <button class="btn bg-blue-500 p-5 rounded-lg justify-content-between">{{ button_label|default('Save') }}</button>
+    {# <button class="btn bg-blue-500 p-5 rounded-lg justify-content-between">{{ button_label|default('Save') }}</button> #}
      
 {{ form_end(form) }}
     </div>

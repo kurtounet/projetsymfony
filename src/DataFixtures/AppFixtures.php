@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Address;
 use App\Entity\Character;
 use App\Entity\Contact;
 use App\Entity\Planet;
@@ -22,7 +23,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class AppFixtures extends Fixture
 {
-    public const PLANET_REFERENCE = 'planet-';
+
+    public const NB_USERS = 10;
 
     public function __construct(
         private UserPasswordHasherInterface $hasher,
@@ -42,7 +44,8 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         //PLANETS
-        echo "chargement des planets" . PHP_EOL;
+
+        $faker = Factory::create();
 
         $filename = __DIR__ . '/PlanetsAPI.json';
         $file_content = file_get_contents($filename);
@@ -50,8 +53,6 @@ class AppFixtures extends Fixture
         foreach ($planetsArray as $planet) {
             $localImage = explode('/', $planet->getImage());
             $planet->setImage(end($localImage));
-            echo end($localImage) . PHP_EOL;
-
             $manager->persist($planet);
         }
 
@@ -60,8 +61,6 @@ class AppFixtures extends Fixture
 
 
         //FIXTURES CHARACTERS
-
-
         $filename = __DIR__ . '/CharactersAPI.json';
         $file_content = file_get_contents($filename);
         //$characters = $this->serializer->deserialize($file_content, Character::class . '[]', 'json');
@@ -116,28 +115,43 @@ class AppFixtures extends Fixture
 
 
         }
-        echo "chargement des characters ok" . PHP_EOL;
+
 
 
 
         // FIXTURES USER
         $filename = __DIR__ . '/user.json';
         $file_content = file_get_contents($filename);
-        $UserArray = $this->serializer->deserialize($file_content, User::class . '[]', 'json');
+        $items = json_decode($file_content, true);
+        // $UserArray = $this->serializer->deserialize($file_content, User::class . '[]', 'json');
 
-        foreach ($UserArray as $user) {
-            $user->setUserName($user->getFirstName() . $user->getLastName());
+        foreach ($items as $item) {
 
-            $user->setPassword($user->getPassword());
-            $user->setAvatar('avatar1.webp');
+            $user = new User();
+            $address = new Address();
+            $address->setNum($item["num"]);
+            $address->setStreet($item["street"]);
+            $address->setCity($item["city"]);
+            $address->setZipcode($item["zipcode"]);
+            $address->setCountry($item["country"]);
+            $manager->persist($address);
 
+            $user->setFirstName($item["firstName"]);
+            $user->setLastName($item["lastName"]);
+            $user->setAvatar($item["avatar"]);
+            $user->setRoles($item["roles"]);
+
+            $user->setEmail($item["email"]);
+            $user->setPassword($item["password"]);
 
             $user->setCharacterPref($characters[rand(0, 3)]);
-            // $user->setPassword($this->hasher->hashPassword($user, $user->getPassword()));
-            $manager->persist($user);
-        }
-        echo "chargement des User ok" . PHP_EOL;
 
+            $user->setUserName($item["firstName"] . $item["lastName"]);
+            $user->setAddress($address);
+            $manager->persist($user);
+
+
+        }
 
         $faker = Factory::create();
 
@@ -150,11 +164,16 @@ class AppFixtures extends Fixture
                 ->setMessage($faker->paragraph)
                 ->setSubject($faker->sentence)
                 ->setCreatedAt($faker->dateTime);
-
             $manager->persist($contact);
         }
-        echo "chargement des Message ok" . PHP_EOL;
+
         $manager->flush();
+
+        echo "chargement des Message ok" . PHP_EOL;
+        echo "chargement des user ok" . PHP_EOL;
+        echo "chargement des characters ok" . PHP_EOL;
+        echo "chargement des plantes ok" . PHP_EOL;
+
     }
 
 

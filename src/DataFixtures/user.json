@@ -7,12 +7,12 @@
     "roles": [
       "ROLE_ADMIN"
     ],
-    "numAdress": 10,
-    "adress": "rue de la paix",
+    "num": 10,
+    "street": "rue de la paix",
     "city": "Paris",
     "zipcode": "75000",
     "country": "France",
-    "avatar": "assets/avatar1.jpg",
+    "avatar": "avatar1.webp",
     "CharacterPref": null
   },
   {
@@ -23,12 +23,12 @@
     "roles": [
       "ROLE_USER"
     ],
-    "numAdress": 5,
-    "adress": "Avenue des Champs-Élysées",
+    "num": 5,
+    "street": "Avenue des Champs-Élysées",
     "city": "Paris",
     "zipcode": "75008",
     "country": "France",
-    "avatar": "assets/avatar2.jpg",
+    "avatar": "avatar1.webp",
     "CharacterPref": null
   },
   {
@@ -39,12 +39,12 @@
     "roles": [
       "ROLE_ADMIN"
     ],
-    "numAdress": 12,
-    "adress": "Boulevard Haussmann",
+    "num": 12,
+    "street": "Boulevard Haussmann",
     "city": "Paris",
     "zipcode": "75009",
     "country": "France",
-    "avatar": "assets/avatar3.jpg",
+    "avatar": "avatar1.webp",
     "CharacterPref": null
   },
   {
@@ -55,12 +55,12 @@
     "roles": [
       "ROLE_ADMIN"
     ],
-    "numAdress": 3,
-    "adress": "Rue de Rivoli",
+    "num": 3,
+    "street": "Rue de Rivoli",
     "city": "Paris",
     "zipcode": "75001",
     "country": "France",
-    "avatar": "assets/avatar4.jpg",
+    "avatar": "avatar1.webp",
     "CharacterPref": null
   },
   {
@@ -71,12 +71,12 @@
     "roles": [
       "ROLE_USER"
     ],
-    "numAdress": 20,
-    "adress": "Rue Saint-Honoré",
+    "num": 20,
+    "street": "Rue Saint-Honoré",
     "city": "Paris",
     "zipcode": "75001",
     "country": "France",
-    "avatar": "assets/avatar5.jpg",
+    "avatar": "avatar1.webp",
     "CharacterPref": null
   },
   {
@@ -87,12 +87,12 @@
     "roles": [
       "ROLE_ADMIN"
     ],
-    "numAdress": 7,
-    "adress": "Rue de la Paix",
+    "num": 7,
+    "street": "Rue de la Paix",
     "city": "Paris",
     "zipcode": "75002",
     "country": "France",
-    "avatar": "assets/avatar6.jpg",
+    "avatar": "avatar1.webp",
     "CharacterPref": null
   },
   {
@@ -103,12 +103,12 @@
     "roles": [
       "ROLE_USER"
     ],
-    "numAdress": 15,
-    "adress": "Avenue Montaigne",
+    "num": 15,
+    "street": "Avenue Montaigne",
     "city": "Paris",
     "zipcode": "75008",
     "country": "France",
-    "avatar": "assets/avatar7.jpg",
+    "avatar": "avatar1.webp",
     "CharacterPref": null
   },
   {
@@ -119,12 +119,12 @@
     "roles": [
       "ROLE_ADMIN"
     ],
-    "numAdress": 2,
-    "adress": "Rue de la Fayette",
+    "num": 2,
+    "street": "Rue de la Fayette",
     "city": "Paris",
     "zipcode": "75009",
     "country": "France",
-    "avatar": "assets/avatar8.jpg",
+    "avatar": "avatar1.webp",
     "CharacterPref": null
   },
   {
@@ -135,12 +135,12 @@
     "roles": [
       "ROLE_USER"
     ],
-    "numAdress": 8,
-    "adress": "Boulevard Saint-Germain",
+    "num": 8,
+    "street": "Boulevard Saint-Germain",
     "city": "Paris",
     "zipcode": "75006",
     "country": "France",
-    "avatar": "assets/avatar9.jpg",
+    "avatar": "avatar1.webp",
     "CharacterPref": null
   },
   {
@@ -151,12 +151,12 @@
     "roles": [
       "ROLE_ADMIN"
     ],
-    "numAdress": 14,
-    "adress": "Avenue de l'Opéra",
+    "num": 14,
+    "street": "Avenue de l'Opéra",
     "city": "Paris",
     "zipcode": "75002",
     "country": "France",
-    "avatar": "assets/avatar10.jpg",
+    "avatar": "avatar1.webp",
     "CharacterPref": null
   }
 ]
