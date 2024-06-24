@@ -15,8 +15,14 @@ Cette commande appelle l'API pour télécharger les données et les images de ch
 
 Elle appelle un service CallApiService, qui utilise HttpClient pour récupérer les données, puis CallApiService appelle DownloadImageService pour télécharger les images avec le composant Filesystem.
 
-Les données sont sauvegardées dans des fichiers JSON :
+Les données des users sont dans le users.json, il ne faut pas le supprimer.
 
+Pour les fichiers suivant, ils peuvent être générés par la commande :
+```bash
+symfony console call-api
+```
+
+Les données sont sauvegardées dans des fichiers JSON :
 - Pour les personnages : `src/DataFixtures/charactersApi.json`
 - Pour les planètes : `src/DataFixtures/planetsApi.json`
 
