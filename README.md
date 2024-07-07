@@ -1,5 +1,5 @@
 # Projet examen Symfony
-## Voici une bref du projet déscription du projet:
+## Voici une bref déscription du projet:
 
 ## Appel à 2 API
 ### Pour récupérer les données
